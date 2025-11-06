@@ -31,5 +31,6 @@ extension ContactDetailsView {
             }
         }
         .buttonStyle(.label)
+        .sensoryFeedback(.impact(flexibility: .soft, intensity: 0.9), trigger: store.contact.isFavorite)
     }
 }
