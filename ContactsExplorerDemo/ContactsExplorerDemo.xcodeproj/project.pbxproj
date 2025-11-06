@@ -16,6 +16,7 @@
 		2E6278742EBC6B6C00E7F67C /* Utilities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utilities; sourceTree = "<group>"; };
 		2E6278752EBC6BC000E7F67C /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
 		2E6278762EBC6C8F00E7F67C /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
+		2E6278772EBC6CD100E7F67C /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Presentation; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -58,6 +59,7 @@
 				2E6278742EBC6B6C00E7F67C /* Utilities */,
 				2E6278752EBC6BC000E7F67C /* Data */,
 				2E6278762EBC6C8F00E7F67C /* Domain */,
+				2E6278772EBC6CD100E7F67C /* Presentation */,
 				2E62785C2EBC67AB00E7F67C /* ContactsExplorerDemo */,
 				2E62785B2EBC67AB00E7F67C /* Products */,
 			);
