@@ -12,6 +12,7 @@ fileprivate struct GroupedModifier: ViewModifier {
     func body(content: Content) -> some View {
         if #available(iOS 26.0, *) {
             content
+                .clipShape(.rect(cornerRadius: DesignSystem.CornerRadius.grouping))
                 .glassEffect(in: .rect(cornerRadius: DesignSystem.CornerRadius.grouping))
         } else {
             content
