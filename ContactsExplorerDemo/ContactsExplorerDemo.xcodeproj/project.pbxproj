@@ -13,6 +13,10 @@
 		2E62788F2EBC801B00E7F67C /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62788E2EBC801B00E7F67C /* Services */; };
 		2E6278912EBC801B00E7F67C /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278902EBC801B00E7F67C /* Domain */; };
 		2E6278932EBC801B00E7F67C /* Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278922EBC801B00E7F67C /* Utilities */; };
+		2E6278952EBC85C600E7F67C /* AppNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278942EBC85C600E7F67C /* AppNavigator */; };
+		2E6278972EBC85C600E7F67C /* ContactsFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278962EBC85C600E7F67C /* ContactsFeature */; };
+		2E6278992EBC85C600E7F67C /* ContactsNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278982EBC85C600E7F67C /* ContactsNavigator */; };
+		2E62789B2EBC85C600E7F67C /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62789A2EBC85C600E7F67C /* DesignSystem */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +41,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E6278912EBC801B00E7F67C /* Domain in Frameworks */,
+				2E6278952EBC85C600E7F67C /* AppNavigator in Frameworks */,
+				2E6278972EBC85C600E7F67C /* ContactsFeature in Frameworks */,
+				2E6278992EBC85C600E7F67C /* ContactsNavigator in Frameworks */,
 				2E6278932EBC801B00E7F67C /* Utilities in Frameworks */,
+				2E62789B2EBC85C600E7F67C /* DesignSystem in Frameworks */,
 				2E62788F2EBC801B00E7F67C /* Services in Frameworks */,
 				2E62788D2EBC801B00E7F67C /* Models in Frameworks */,
 				2E62786F2EBC6A8500E7F67C /* Localized in Frameworks */,
@@ -102,6 +110,10 @@
 				2E62788E2EBC801B00E7F67C /* Services */,
 				2E6278902EBC801B00E7F67C /* Domain */,
 				2E6278922EBC801B00E7F67C /* Utilities */,
+				2E6278942EBC85C600E7F67C /* AppNavigator */,
+				2E6278962EBC85C600E7F67C /* ContactsFeature */,
+				2E6278982EBC85C600E7F67C /* ContactsNavigator */,
+				2E62789A2EBC85C600E7F67C /* DesignSystem */,
 			);
 			productName = ContactsExplorerDemo;
 			productReference = 2E62785A2EBC67AB00E7F67C /* ContactsExplorerDemo.app */;
@@ -440,6 +452,22 @@
 		2E6278922EBC801B00E7F67C /* Utilities */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Utilities;
+		};
+		2E6278942EBC85C600E7F67C /* AppNavigator */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppNavigator;
+		};
+		2E6278962EBC85C600E7F67C /* ContactsFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ContactsFeature;
+		};
+		2E6278982EBC85C600E7F67C /* ContactsNavigator */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ContactsNavigator;
+		};
+		2E62789A2EBC85C600E7F67C /* DesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystem;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
