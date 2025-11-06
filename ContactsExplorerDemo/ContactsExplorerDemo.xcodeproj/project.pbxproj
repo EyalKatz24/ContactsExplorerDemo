@@ -23,22 +23,9 @@
 		2E6278772EBC6CD100E7F67C /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Presentation; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		2E6278692EBC695D00E7F67C /* Exceptions for "ContactsExplorerDemo" folder in "ContactsExplorerDemo" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Supporting Files/Info.plist",
-			);
-			target = 2E6278592EBC67AB00E7F67C /* ContactsExplorerDemo */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2E62785C2EBC67AB00E7F67C /* ContactsExplorerDemo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				2E6278692EBC695D00E7F67C /* Exceptions for "ContactsExplorerDemo" folder in "ContactsExplorerDemo" target */,
-			);
 			path = ContactsExplorerDemo;
 			sourceTree = "<group>";
 		};
@@ -306,7 +293,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ContactsExplorerDemo/Info.plist;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Contacts access is required to use that app.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -351,7 +338,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ContactsExplorerDemo/Info.plist;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Contacts access is required to use that app.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
