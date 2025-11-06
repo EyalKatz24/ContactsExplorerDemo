@@ -13,6 +13,7 @@
 
 /* Begin PBXFileReference section */
 		2E62785A2EBC67AB00E7F67C /* ContactsExplorerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactsExplorerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E6278742EBC6B6C00E7F67C /* Utilities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utilities; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -52,6 +53,7 @@
 		2E6278512EBC67AB00E7F67C = {
 			isa = PBXGroup;
 			children = (
+				2E6278742EBC6B6C00E7F67C /* Utilities */,
 				2E62785C2EBC67AB00E7F67C /* ContactsExplorerDemo */,
 				2E62785B2EBC67AB00E7F67C /* Products */,
 			);
