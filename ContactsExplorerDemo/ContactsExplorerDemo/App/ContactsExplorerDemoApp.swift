@@ -6,12 +6,19 @@
 //
 
 import SwiftUI
+import AppNavigator
+import ComposableArchitecture
 
 @main
 struct ContactsExplorerDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppNavigator.ContentView(
+                store: Store(
+                    initialState: AppNavigator.State(),
+                    reducer: AppNavigator.init
+                )
+            )
         }
     }
 }
