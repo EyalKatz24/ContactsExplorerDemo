@@ -6,13 +6,35 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2E62786C2EBC6A2700E7F67C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62786B2EBC6A2700E7F67C /* ComposableArchitecture */; };
+		2E62786F2EBC6A8500E7F67C /* Localized in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62786E2EBC6A8500E7F67C /* Localized */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		2E62785A2EBC67AB00E7F67C /* ContactsExplorerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactsExplorerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E6278742EBC6B6C00E7F67C /* Utilities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utilities; sourceTree = "<group>"; };
+		2E6278752EBC6BC000E7F67C /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
+		2E6278762EBC6C8F00E7F67C /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
+		2E6278772EBC6CD100E7F67C /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Presentation; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2E6278692EBC695D00E7F67C /* Exceptions for "ContactsExplorerDemo" folder in "ContactsExplorerDemo" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Supporting Files/Info.plist",
+			);
+			target = 2E6278592EBC67AB00E7F67C /* ContactsExplorerDemo */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2E62785C2EBC67AB00E7F67C /* ContactsExplorerDemo */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2E6278692EBC695D00E7F67C /* Exceptions for "ContactsExplorerDemo" folder in "ContactsExplorerDemo" target */,
+			);
 			path = ContactsExplorerDemo;
 			sourceTree = "<group>";
 		};
@@ -23,6 +45,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E62786F2EBC6A8500E7F67C /* Localized in Frameworks */,
+				2E62786C2EBC6A2700E7F67C /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +56,10 @@
 		2E6278512EBC67AB00E7F67C = {
 			isa = PBXGroup;
 			children = (
+				2E6278742EBC6B6C00E7F67C /* Utilities */,
+				2E6278752EBC6BC000E7F67C /* Data */,
+				2E6278762EBC6C8F00E7F67C /* Domain */,
+				2E6278772EBC6CD100E7F67C /* Presentation */,
 				2E62785C2EBC67AB00E7F67C /* ContactsExplorerDemo */,
 				2E62785B2EBC67AB00E7F67C /* Products */,
 			);
@@ -65,6 +93,8 @@
 			);
 			name = ContactsExplorerDemo;
 			packageProductDependencies = (
+				2E62786B2EBC6A2700E7F67C /* ComposableArchitecture */,
+				2E62786E2EBC6A8500E7F67C /* Localized */,
 			);
 			productName = ContactsExplorerDemo;
 			productReference = 2E62785A2EBC67AB00E7F67C /* ContactsExplorerDemo.app */;
@@ -94,6 +124,10 @@
 			);
 			mainGroup = 2E6278512EBC67AB00E7F67C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2E62786A2EBC6A2700E7F67C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				2E62786D2EBC6A8500E7F67C /* XCRemoteSwiftPackageReference "Localized" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2E62785B2EBC67AB00E7F67C /* Products */;
 			projectDirPath = "";
@@ -252,6 +286,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ContactsExplorerDemo/Info.plist;
+				INFOPLIST_KEY_NSContactsUsageDescription = "Contacts access is required to use that app.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -295,6 +331,8 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ContactsExplorerDemo/Info.plist;
+				INFOPLIST_KEY_NSContactsUsageDescription = "Contacts access is required to use that app.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -349,6 +387,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2E62786A2EBC6A2700E7F67C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.23.1;
+			};
+		};
+		2E62786D2EBC6A8500E7F67C /* XCRemoteSwiftPackageReference "Localized" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EyalKatz24/Localized.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2E62786B2EBC6A2700E7F67C /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E62786A2EBC6A2700E7F67C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		2E62786E2EBC6A8500E7F67C /* Localized */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E62786D2EBC6A8500E7F67C /* XCRemoteSwiftPackageReference "Localized" */;
+			productName = Localized;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2E6278522EBC67AB00E7F67C /* Project object */;
 }
