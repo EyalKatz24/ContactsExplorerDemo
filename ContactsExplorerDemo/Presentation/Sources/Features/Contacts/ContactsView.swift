@@ -19,12 +19,98 @@ public struct ContactsView: View {
     }
     
     public var body: some View {
-        VStack(spacing: 0) {
-            Text("Contacts")
+        GeometryReader { geometry in
+            ScrollView(showsIndicators: false) {
+                LazyVStack(spacing: 0) {
+                    switch store.viewState {
+                    case .loading:
+                        loadingView()
+                        
+                    case .loaded:
+                        if store.contacts.isEmpty {
+                            emptyStateView(geometry)
+                        } else {
+                            loadedView()
+                        }
+                        
+                    case .error:
+                        errorView(geometry)
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal)
+            .animation(.smooth, value: store.viewState)
+            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle(.localized(.myContactsTitle))
+            .searchable(
+                text: $store.searchText.sending(\.onSearchTextChange),
+                placement: .navigationBarDrawer(displayMode: .always),
+                prompt: .localized(.searchContactsPrompt)
+            )
+            .autocorrectionDisabled()
+            .onFirstAppear {
+                send(.onFirstAppear)
+            }
         }
-        .font(.largeTitle)
-        .onAppear {
-            send(.onAppear)
+    }
+    
+    @ViewBuilder
+    private func loadingView() -> some View {
+        VStack(spacing: 0) {
+            ForEach(0..<16, id: \.self) { _ in
+                ContactItemShimmer()
+            }
+            
+            Spacer()
+        }
+    }
+    
+    @ViewBuilder
+    private func emptyStateView(_ geometry: GeometryProxy) -> some View {
+        if store.searchText.isEmpty {
+            EmptyStateView(
+                type: .noContactsToDisplay,
+                minHeight: geometry.size.height
+            )
+        } else {
+            EmptyStateView(
+                type: .noContactSearchResults(searchText: store.searchText),
+                minHeight: geometry.size.height
+            )
+        }
+    }
+    
+    @ViewBuilder
+    private func errorView(_ geometry: GeometryProxy) -> some View {
+        EmptyStateView(
+            type: .noContactsAuthorization,
+            minHeight: geometry.size.height) {
+                send(.onOpenSettingsTap)
+            }
+    }
+    
+    @ViewBuilder
+    private func loadedView() -> some View {
+        ForEach(store.contacts) { contact in
+            Button {
+                send(.onContactTap(contact))
+            } label: {
+                ContactItemView(contact: contact, highlightedText: store.searchText)
+            }
+            .contextMenu {
+                ForEach(contact.actions, id: \.self) { action in
+                    Button {
+                        send(.onContactActionTap(contact, action))
+                    } label: {
+                        Label(
+                            .localized(action.title(isFavorite: contact.isFavorite)),
+                            systemImage: action.imageSystemName(isFavorite: contact.isFavorite)
+                        )
+                    }
+                    .disabled(!action.isEnabled)
+                }
+            }
         }
     }
 }

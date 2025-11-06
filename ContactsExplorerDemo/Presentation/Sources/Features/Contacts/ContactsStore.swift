@@ -7,6 +7,8 @@
 
 import Foundation
 import ComposableArchitecture
+import Models
+import InternalUtilities
 
 @Reducer
 public struct ContactsStore {
@@ -14,24 +16,45 @@ public struct ContactsStore {
     @ObservableState
     public struct State: Equatable {
         
+        @Shared(.favoriteContacts)
+        var favoriteContacts: IdentifiedArrayOf<Contact> = []
+        var viewState: ViewState
+        var searchText: String = .empty
+        var contacts: [Contact]
+        
         public init() {
+            @Dependency(\.interactor) var interactor
+            self.contacts = interactor.allContacts
             
+            self.viewState = switch interactor.contactsAuthorization {
+            case .permitted, .notDetermined: .loading
+            case .notPermitted: .error
+            }
         }
     }
     
     public enum Action: ViewAction, Equatable {
-        @CasePathable
         public enum View: Equatable {
-            case onAppear
+            case onFirstAppear
+            case onContactTap(Contact)
+            case onContactActionTap(Contact, ContactAction)
+            case onOpenSettingsTap
         }
         
-        @CasePathable
         public enum Navigation: Equatable {
-            
+            case onContactTap(Contact)
         }
         
         case view(View)
         case navigation(Navigation)
+        case checkContactsAuthorization
+        case requestContactsAuthorization
+        case onContactsAuthorizationResult(Bool)
+        case retrieveContacts
+        case onRetrieveContactsResult
+        case onSearchTextChange(String)
+        case setFilteredContacts([Contact])
+        case toggleContactFavoriteStatus(Contact)
     }
     
     @Dependency(\.interactor) private var interactor
@@ -44,6 +67,77 @@ public struct ContactsStore {
             case let .view(action):
                 return reduceViewAction(&state, action)
                 
+            case .checkContactsAuthorization:
+                switch interactor.contactsAuthorization {
+                case .permitted:
+                    return .run { send in
+                        guard await interactor.didRetrieveContacts() else {
+                            await send(.retrieveContacts)
+                            return
+                        }
+                        
+                        await send(.onRetrieveContactsResult)
+                    }
+                    
+                case .notPermitted:
+                    state.viewState = .error
+                    return .none
+                    
+                case .notDetermined:
+                    return .send(.requestContactsAuthorization)
+                }
+                
+            case .requestContactsAuthorization:
+                return .run { send in
+                    let authorized = await interactor.requestContactsAuthorization()
+                    await send(.onContactsAuthorizationResult(authorized))
+                }
+                
+            case let .onContactsAuthorizationResult(authorized):
+                state.viewState = authorized ? .loaded : .error
+                return .none
+                
+            case .retrieveContacts:
+                return .run { send in
+                    await interactor.retrieveContacts()
+                    await send(.onRetrieveContactsResult)
+                }
+
+            case .onRetrieveContactsResult:
+                state.contacts = interactor.allContacts
+                state.viewState = .loaded
+                return .none
+                
+            case let .onSearchTextChange(searchValue):
+                state.searchText = searchValue
+
+                guard searchValue.isNotEmpty else {
+                    state.contacts = interactor.allContacts
+                    return .none
+                }
+        
+                let searchText = state.searchText
+                return .concatenate(
+                    .cancel(id: CancelID.contactsFilter),
+                    .run(priority: .userInitiated) { send in
+                        let filteredContacts = await interactor.filterContacts(using: searchValue)
+
+                        if searchValue == searchText {
+                            await send(.setFilteredContacts(filteredContacts))
+                        }
+                    }
+                    .cancellable(id: CancelID.contactsFilter, cancelInFlight: true)
+                )
+                
+            case let .setFilteredContacts(filteredContacts):
+                state.contacts = filteredContacts
+                return .none
+                
+            case let .toggleContactFavoriteStatus(contact):
+                return .run { send in
+                    await interactor.toggleContactFavoriteStatus(contact)
+                }
+                
             case .navigation:
                 return .none
             }
@@ -52,9 +146,51 @@ public struct ContactsStore {
     
     private func reduceViewAction(_ state: inout State, _ action: Action.View) -> Effect<Action> {
         switch action {
-        case .onAppear:
+        case .onFirstAppear:
+            switch state.viewState {
+            case .loading:
+                return .send(.checkContactsAuthorization, after: 0.5)
+                
+            case .loaded:
+                return .none
+                
+            case .error:
+                return .none
+            }
+            
+        case let .onContactTap(contact):
+            return .send(.navigation(.onContactTap(contact)))
+            
+        case let .onContactActionTap(contact, action):
+            return reduceContactActionTap(action, for: contact)
+            
+        case .onOpenSettingsTap:
+            return .run { _ in
+                await interactor.openAppSettings()
+            }
+        }
+    }
+    
+    private func reduceContactActionTap(_ contactAction: ContactAction, for contact: Contact) -> Effect<Action> {
+        switch contactAction {
+        case .favoriteToggle:
+            return .send(.toggleContactFavoriteStatus(contact))
+            
+        case .message:
             return .none
         }
+    }
+}
+
+extension ContactsStore {
+    enum ViewState: Equatable {
+        case loading
+        case loaded
+        case error
+    }
+    
+    fileprivate enum CancelID {
+        case contactsFilter
     }
 }
 

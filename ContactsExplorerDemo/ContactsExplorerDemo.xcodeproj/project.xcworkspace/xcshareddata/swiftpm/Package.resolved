@@ -1,5 +1,5 @@
 {
-  "originHash" : "444e14736b6cce3ee46f95a39522c1129195ce8ef709327b5f71314b0dfd5449",
+  "originHash" : "e00763c101857d707afc2f96cc7eb1d1dbea57b6d280cbb3096f66068dcbc100",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -125,6 +125,15 @@
       "state" : {
         "revision" : "0687f71944021d616d34d922343dcef086855920",
         "version" : "600.0.1"
+      }
+    },
+    {
+      "identity" : "swiftui-very-lazy",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/EyalKatz24/swiftui-very-lazy",
+      "state" : {
+        "revision" : "678d07b30a40f23169c77969cf5bd4cdf41f764d",
+        "version" : "1.0.0"
       }
     },
     {

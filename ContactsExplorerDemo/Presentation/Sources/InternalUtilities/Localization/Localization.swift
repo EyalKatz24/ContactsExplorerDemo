@@ -10,5 +10,18 @@ import Localized
 
 @Localized(keyFormat: .lowerSnakeCase)
 public enum Localization: Equatable {
+    case myContactsTitle
+    case searchContactsPrompt
     case email
+    case openSettings
+    case noContactsToDisplay
+    case noContactsToDisplayMessage
+    case noContactSearchResults
+    case noResultsFor(searchText: String)
+    case checkYourSpellingOrTryDifferentKeywords
+    case contactsAccessDenied
+    case enableContactsAccessInSettings
+    case addToFavorites
+    case removeFromFavorites
+    case messageDemoAction
 }

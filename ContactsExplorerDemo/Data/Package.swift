@@ -12,6 +12,7 @@ let package = Package(
     dependencies: [
         .package(path: "../Utilities"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.10.0"),
+        .package(url: "https://github.com/pointfreeco/swift-identified-collections", from: "1.1.1"),
         .package(url: "https://github.com/pointfreeco/swift-sharing", from: "2.7.4")
     ],
     targets: [
@@ -20,6 +21,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Utilities", package: "Utilities"),
                 .product(name: "Dependencies", package: "swift-dependencies"),
+                .product(name: "IdentifiedCollections", package: "swift-identified-collections"),
                 .product(name: "Sharing", package: "swift-sharing"),
             ]
         ),
