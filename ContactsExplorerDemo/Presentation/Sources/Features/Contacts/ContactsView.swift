@@ -57,7 +57,13 @@ public struct ContactsView: View {
     
     @ViewBuilder
     private func loadingView() -> some View {
-        EmptyView() // TODO: Shimmering when items are ready
+        VStack(spacing: 0) {
+            ForEach(0..<16, id: \.self) { _ in
+                ContactItemShimmer()
+            }
+            
+            Spacer()
+        }
     }
     
     @ViewBuilder
