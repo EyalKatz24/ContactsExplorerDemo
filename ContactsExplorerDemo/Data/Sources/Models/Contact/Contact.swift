@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Sharing
+import IdentifiedCollections
 import Utilities
 
 public struct Contact: Identifiable, Codable, Hashable, Sendable {
@@ -49,5 +51,10 @@ public struct Contact: Identifiable, Codable, Hashable, Sendable {
     
     public var mainPhoneNumber: String {
         phoneNumbers.first { $0.isMain }?.number ?? phoneNumbers.first?.number ?? .empty
+    }
+    
+    public var isFavorite: Bool {
+        @Shared(.favoriteContacts) var favoriteContacts: IdentifiedArrayOf<Contact> = []
+        return favoriteContacts[id: id] != nil
     }
 }

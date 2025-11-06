@@ -9,6 +9,7 @@ import Foundation
 import Contacts
 import Combine
 import Sharing
+import IdentifiedCollections
 import Models
 import Utilities
 
@@ -16,8 +17,12 @@ public actor ContactsService {
     
     // MARK: Properties
     
+    @Shared(.favoriteContacts)
+    private var favoriteContacts: IdentifiedArrayOf<Contact> = []
+    
     @Shared(.allContacts)
     public private(set) var allContacts: [Contact] = []
+    
     public private(set) var didRetrieveContacts: Bool = false
     
     // MARK: Computed Properties
@@ -161,6 +166,14 @@ public actor ContactsService {
             
         default:
             return (try? await CNContactStore().requestAccess(for: .contacts)) ?? false
+        }
+    }
+    
+    public func toggleContactFavoriteStatus(_ contact: Contact) {
+        if contact.isFavorite {
+            $favoriteContacts.withLock { $0[id: contact.id] = nil }
+        } else {
+            $favoriteContacts.withLock { $0[id: contact.id] = contact }
         }
     }
 }
