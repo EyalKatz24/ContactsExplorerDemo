@@ -15,6 +15,9 @@ public struct ContactsStore {
     
     @ObservableState
     public struct State: Equatable {
+        
+        @Shared(.favoriteContacts)
+        var favoriteContacts: IdentifiedArrayOf<Contact> = []
         var viewState: ViewState
         var searchText: String = .empty
         var contacts: [Contact]
@@ -34,6 +37,7 @@ public struct ContactsStore {
         public enum View: Equatable {
             case onFirstAppear
             case onContactTap(Contact)
+            case onContactActionTap(Contact, ContactAction)
             case onOpenSettingsTap
         }
         
@@ -50,6 +54,7 @@ public struct ContactsStore {
         case onRetrieveContactsResult
         case onSearchTextChange(String)
         case setFilteredContacts([Contact])
+        case toggleContactFavoriteStatus(Contact)
     }
     
     @Dependency(\.interactor) private var interactor
@@ -128,6 +133,11 @@ public struct ContactsStore {
                 state.contacts = filteredContacts
                 return .none
                 
+            case let .toggleContactFavoriteStatus(contact):
+                return .run { send in
+                    await interactor.toggleContactFavoriteStatus(contact)
+                }
+                
             case .navigation:
                 return .none
             }
@@ -151,10 +161,23 @@ public struct ContactsStore {
         case let .onContactTap(contact):
             return .send(.navigation(.onContactTap(contact)))
             
+        case let .onContactActionTap(contact, action):
+            return reduceContactActionTap(action, for: contact)
+            
         case .onOpenSettingsTap:
             return .run { _ in
                 await interactor.openAppSettings()
             }
+        }
+    }
+    
+    private func reduceContactActionTap(_ contactAction: ContactAction, for contact: Contact) -> Effect<Action> {
+        switch contactAction {
+        case .favoriteToggle:
+            return .send(.toggleContactFavoriteStatus(contact))
+            
+        case .message:
+            return .none
         }
     }
 }

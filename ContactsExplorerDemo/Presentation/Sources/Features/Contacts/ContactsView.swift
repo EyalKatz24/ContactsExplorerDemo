@@ -98,6 +98,19 @@ public struct ContactsView: View {
             } label: {
                 ContactItemView(contact: contact, highlightedText: store.searchText)
             }
+            .contextMenu {
+                ForEach(contact.actions, id: \.self) { action in
+                    Button {
+                        send(.onContactActionTap(contact, action))
+                    } label: {
+                        Label(
+                            .localized(action.title(isFavorite: contact.isFavorite)),
+                            systemImage: action.imageSystemName(isFavorite: contact.isFavorite)
+                        )
+                    }
+                    .disabled(!action.isEnabled)
+                }
+            }
         }
     }
 }
