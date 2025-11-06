@@ -13,7 +13,7 @@ import Models
 extension ContactDetailsView {
     
     @ViewBuilder
-    private func detailsView() -> some View {
+    func detailsView() -> some View {
         VStack(spacing: 20) {
             DetailsSection(title: .phoneNumbers) {
                 ForEach(store.contact.phoneNumbers, id: \.self) { phoneNumber in

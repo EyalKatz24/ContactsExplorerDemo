@@ -7,22 +7,24 @@
 
 import Foundation
 import ComposableArchitecture
+import Models
 
 @Reducer
 public struct ContactDetailsStore {
     
     @ObservableState
     public struct State: Equatable {
+        public let contact: Contact
         
-        public init() {
-            
+        public init(contact: Contact) {
+            self.contact = contact
         }
     }
     
     public enum Action: ViewAction, Equatable {
         @CasePathable
         public enum View: Equatable {
-            case onAppear
+            case onFirstAppear
         }
         
         @CasePathable
@@ -52,7 +54,7 @@ public struct ContactDetailsStore {
     
     private func reduceViewAction(_ state: inout State, _ action: Action.View) -> Effect<Action> {
         switch action {
-        case .onAppear:
+        case .onFirstAppear:
             return .none
         }
     }
