@@ -9,6 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 import DesignSystem
 import ContactsFeature
+import ContactDetailsFeature
 
 public extension ContactsNavigator {
     
@@ -27,10 +28,10 @@ public extension ContactsNavigator {
                     ContactsView(store: store.scope(state: \.root, action: \.root))
                 },
                 destination: { store in
-                    // Future dev
-//                    switch store.case {
-//
-//                    }
+                    switch store.case {
+                    case let .contactDetails(store):
+                        ContactDetailsView(store: store)
+                    }
                 }
             )
         }

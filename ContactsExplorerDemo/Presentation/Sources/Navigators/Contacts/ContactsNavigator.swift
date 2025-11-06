@@ -7,16 +7,15 @@
 
 import ComposableArchitecture
 import ContactsFeature
+import ContactDetailsFeature
 
 @Reducer
 public struct ContactsNavigator {
     
     @ObservableState
-    public struct State: Equatable {
+    public struct State {
         var root: ContactsStore.State
         var path = StackState<Path.State>()
-        
-        @Presents var destination: Destination.State?
         
         public init() {
             self.root = .init()
@@ -26,7 +25,6 @@ public struct ContactsNavigator {
     public enum Action {
         case root(ContactsStore.Action)
         case path(StackAction<Path.State, Path.Action>)
-        case destination(PresentationAction<Destination.Action>)
     }
     
     public init() { }
@@ -36,24 +34,29 @@ public struct ContactsNavigator {
         
         Reduce { state, action in
             switch action {
-            case .root, .path, .destination:
+            case let .root(.navigation(action)):
+                return reduceContactsNavigationAction(&state, action)
+                
+            case .root, .path:
                 return .none
             }
         }
         .forEach(\.path, action: \.path)
-        .ifLet(\.$destination, action: \.destination)
+    }
+    
+    private func reduceContactsNavigationAction(_ state: inout State, _ action: ContactsStore.Action.Navigation) -> Effect<Action> {
+        switch action {
+        case let .onContactTap(contact):
+            state.path.append(.contactDetails(ContactDetailsStore.State(contact: contact)))
+            return .none
+        }
     }
 }
 
 extension ContactsNavigator {
     
-    @Reducer(state: .equatable, action: .equatable)
+    @Reducer
     public enum Path {
-
-    }
-    
-    @Reducer(state: .equatable)
-    public enum Destination {
-        
+        case contactDetails(ContactDetailsStore)
     }
 }
