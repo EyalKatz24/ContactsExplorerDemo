@@ -8,6 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 import DesignSystem
+import Models
 
 @ViewAction(for: ContactDetailsStore.self)
 public struct ContactDetailsView: View {
@@ -19,13 +20,41 @@ public struct ContactDetailsView: View {
     }
     
     public var body: some View {
-        VStack(spacing: 0) {
-            Text("ContactDetails")
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: 0) {
+                ContactImage(
+                    contact: store.contact,
+                    size: .fixedLarge
+                )
+                .padding(.top, 24)
+                
+                header()
+                    .padding(.top, 16)
+                    
+                detailsView()
+                    .padding(.top, 40)
+            }
         }
-        .font(.largeTitle)
-        .onAppear {
-            send(.onAppear)
+        .featureScreen()
+        .background {
+            contactBackgroundGradient()
         }
+        .onFirstAppear {
+            send(.onFirstAppear)
+        }
+    }
+    
+    @ViewBuilder
+    private func contactBackgroundGradient() -> some View {
+        LinearGradient(
+            colors: [
+                .white,
+                store.contact.averageColor
+            ],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+        .ignoresSafeArea()
     }
 }
 
@@ -33,7 +62,17 @@ public struct ContactDetailsView: View {
     NavigationStack {
         ContactDetailsView(
             store: Store(
-                initialState: ContactDetailsStore.State(),
+                initialState: ContactDetailsStore.State(
+                    contact: Contact(
+                        id: "12345",
+                        imageData: nil,
+                        firstName: "John",
+                        lastName: "Doe",
+                        phoneNumbers: [.init(label: "work", labelType: .other, number: "+1234567890")],
+                        emails: [.init(label: "work", address: "john.appleseed@example.com")],
+                        birthday: nil
+                    )
+                ),
                 reducer: ContactDetailsStore.init
             )
         )
