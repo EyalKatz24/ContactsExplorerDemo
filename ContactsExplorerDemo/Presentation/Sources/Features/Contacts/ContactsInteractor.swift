@@ -13,6 +13,9 @@ import Models
 struct ContactsInteractor {
     @Dependency(\.contacts.all) private var getAllContacts
     @Dependency(\.contacts.authorization) private var getContactsAuthorization
+    @Dependency(\.contacts.didRetrieveContacts) var didRetrieveContacts
+    @Dependency(\.contacts.retrieveAll) var retrieveContacts
+    @Dependency(\.contacts.requestContactsAuthorization) var requestContactsAuthorization
     
     var allContacts: [Contact] {
         getAllContacts()

@@ -33,7 +33,7 @@ public struct ContactsStore {
     public enum Action: ViewAction, Equatable {
         @CasePathable
         public enum View: Equatable {
-            case onAppear
+            case onFirstAppear
         }
         
         @CasePathable
@@ -43,6 +43,11 @@ public struct ContactsStore {
         
         case view(View)
         case navigation(Navigation)
+        case checkContactsAuthorization
+        case requestContactsAuthorization
+        case onContactsAuthorizationResult(Bool)
+        case retrieveContacts
+        case onRetrieveContactsResult
     }
     
     @Dependency(\.interactor) private var interactor
@@ -55,6 +60,47 @@ public struct ContactsStore {
             case let .view(action):
                 return reduceViewAction(&state, action)
                 
+            case .checkContactsAuthorization:
+                switch interactor.contactsAuthorization {
+                case .permitted:
+                    return .run { send in
+                        guard await interactor.didRetrieveContacts() else {
+                            await send(.retrieveContacts)
+                            return
+                        }
+                        
+                        await send(.onRetrieveContactsResult)
+                    }
+                    
+                case .notPermitted:
+                    state.viewState = .error
+                    return .none
+                    
+                case .notDetermined:
+                    return .send(.requestContactsAuthorization)
+                }
+                
+            case .requestContactsAuthorization:
+                return .run { send in
+                    let authorized = await interactor.requestContactsAuthorization()
+                    await send(.onContactsAuthorizationResult(authorized))
+                }
+                
+            case let .onContactsAuthorizationResult(authorized):
+                state.viewState = authorized ? .loaded : .error
+                return .none
+                
+            case .retrieveContacts:
+                return .run { send in
+                    await interactor.retrieveContacts()
+                    await send(.onRetrieveContactsResult)
+                }
+
+            case .onRetrieveContactsResult:
+                state.contacts = interactor.allContacts
+                state.viewState = .loaded
+                return .none
+                
             case .navigation:
                 return .none
             }
@@ -63,8 +109,17 @@ public struct ContactsStore {
     
     private func reduceViewAction(_ state: inout State, _ action: Action.View) -> Effect<Action> {
         switch action {
-        case .onAppear:
-            return .none
+        case .onFirstAppear:
+            switch state.viewState {
+            case .loading:
+                return .send(.checkContactsAuthorization, after: 0.5)
+                
+            case .loaded:
+                return .none
+                
+            case .error:
+                return .none
+            }
         }
     }
 }

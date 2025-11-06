@@ -23,8 +23,8 @@ public struct ContactsView: View {
             Text("Contacts")
         }
         .font(.largeTitle)
-        .onAppear {
-            send(.onAppear)
+        .onFirstAppear {
+            send(.onFirstAppear)
         }
     }
 }
