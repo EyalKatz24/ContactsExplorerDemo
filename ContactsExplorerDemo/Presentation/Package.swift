@@ -75,7 +75,9 @@ let navigators: [PackageDescription.Target] = [
         ]
     ),
     .navigator(.contacts,
-        features: [],
+        features: [
+            .contacts
+        ],
         navigators: []
     ),
 ]
