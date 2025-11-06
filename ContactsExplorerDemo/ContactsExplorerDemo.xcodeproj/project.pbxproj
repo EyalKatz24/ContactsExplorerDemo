@@ -19,7 +19,7 @@
 		2E6278692EBC695D00E7F67C /* Exceptions for "ContactsExplorerDemo" folder in "ContactsExplorerDemo" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				"Supporting Files/Info.plist",
 			);
 			target = 2E6278592EBC67AB00E7F67C /* ContactsExplorerDemo */;
 		};
