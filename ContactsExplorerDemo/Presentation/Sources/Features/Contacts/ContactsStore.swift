@@ -31,14 +31,12 @@ public struct ContactsStore {
     }
     
     public enum Action: ViewAction, Equatable {
-        @CasePathable
         public enum View: Equatable {
             case onFirstAppear
             case onContactTap(Contact)
             case onOpenSettingsTap
         }
         
-        @CasePathable
         public enum Navigation: Equatable {
             case onContactTap(Contact)
         }
