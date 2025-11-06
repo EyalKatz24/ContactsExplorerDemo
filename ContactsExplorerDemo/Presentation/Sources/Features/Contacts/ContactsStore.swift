@@ -34,12 +34,13 @@ public struct ContactsStore {
         @CasePathable
         public enum View: Equatable {
             case onFirstAppear
+            case onContactTap(Contact)
             case onOpenSettingsTap
         }
         
         @CasePathable
         public enum Navigation: Equatable {
-            
+            case onContactTap(Contact)
         }
         
         case view(View)
@@ -148,6 +149,9 @@ public struct ContactsStore {
             case .error:
                 return .none
             }
+            
+        case let .onContactTap(contact):
+            return .send(.navigation(.onContactTap(contact)))
             
         case .onOpenSettingsTap:
             return .run { _ in

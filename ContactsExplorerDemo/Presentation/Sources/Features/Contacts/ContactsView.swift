@@ -86,7 +86,13 @@ public struct ContactsView: View {
     
     @ViewBuilder
     private func loadedView() -> some View {
-        EmptyView()
+        ForEach(store.contacts) { contact in
+            Button {
+                send(.onContactTap(contact))
+            } label: {
+                ContactItemView(contact: contact, highlightedText: store.searchText)
+            }
+        }
     }
 }
 
