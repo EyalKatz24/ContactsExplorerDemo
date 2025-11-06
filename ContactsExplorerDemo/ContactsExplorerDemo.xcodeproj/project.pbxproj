@@ -17,6 +17,7 @@
 		2E6278972EBC85C600E7F67C /* ContactsFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278962EBC85C600E7F67C /* ContactsFeature */; };
 		2E6278992EBC85C600E7F67C /* ContactsNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278982EBC85C600E7F67C /* ContactsNavigator */; };
 		2E62789B2EBC85C600E7F67C /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62789A2EBC85C600E7F67C /* DesignSystem */; };
+		2E6278A12EBCA22D00E7F67C /* VeryLazy in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278A02EBCA22D00E7F67C /* VeryLazy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E6278912EBC801B00E7F67C /* Domain in Frameworks */,
+				2E6278A12EBCA22D00E7F67C /* VeryLazy in Frameworks */,
 				2E6278952EBC85C600E7F67C /* AppNavigator in Frameworks */,
 				2E6278972EBC85C600E7F67C /* ContactsFeature in Frameworks */,
 				2E6278992EBC85C600E7F67C /* ContactsNavigator in Frameworks */,
@@ -114,6 +116,7 @@
 				2E6278962EBC85C600E7F67C /* ContactsFeature */,
 				2E6278982EBC85C600E7F67C /* ContactsNavigator */,
 				2E62789A2EBC85C600E7F67C /* DesignSystem */,
+				2E6278A02EBCA22D00E7F67C /* VeryLazy */,
 			);
 			productName = ContactsExplorerDemo;
 			productReference = 2E62785A2EBC67AB00E7F67C /* ContactsExplorerDemo.app */;
@@ -146,6 +149,7 @@
 			packageReferences = (
 				2E62786A2EBC6A2700E7F67C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 				2E62786D2EBC6A8500E7F67C /* XCRemoteSwiftPackageReference "Localized" */,
+				2E62789F2EBCA22D00E7F67C /* XCRemoteSwiftPackageReference "swiftui-very-lazy" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2E62785B2EBC67AB00E7F67C /* Products */;
@@ -426,6 +430,14 @@
 				minimumVersion = 1.3.0;
 			};
 		};
+		2E62789F2EBCA22D00E7F67C /* XCRemoteSwiftPackageReference "swiftui-very-lazy" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EyalKatz24/swiftui-very-lazy";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -470,6 +482,11 @@
 		2E62789A2EBC85C600E7F67C /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DesignSystem;
+		};
+		2E6278A02EBCA22D00E7F67C /* VeryLazy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E62789F2EBCA22D00E7F67C /* XCRemoteSwiftPackageReference "swiftui-very-lazy" */;
+			productName = VeryLazy;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

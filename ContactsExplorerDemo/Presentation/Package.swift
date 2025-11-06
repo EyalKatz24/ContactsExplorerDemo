@@ -19,7 +19,8 @@ let package = Package(
         .package(path: "../Data"),
         .package(path: "../Domain"),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.23.1"),
-        .package(url: "https://github.com/EyalKatz24/Localized", from: "1.3.0")
+        .package(url: "https://github.com/EyalKatz24/Localized", from: "1.3.0"),
+        .package(url: "https://github.com/EyalKatz24/swiftui-very-lazy", from: "1.0.0")
     ],
     targets: [
         .target(
@@ -29,6 +30,7 @@ let package = Package(
                 .product(name: "Utilities", package: "Utilities"),
                 .product(name: "Models", package: "Data"),
                 .product(name: "Domain", package: "Domain"),
+                .product(name: "VeryLazy", package: "swiftui-very-lazy")
             ]
         ),
     
