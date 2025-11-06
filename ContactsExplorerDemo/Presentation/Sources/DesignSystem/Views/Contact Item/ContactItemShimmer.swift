@@ -15,7 +15,10 @@ public struct ContactItemShimmer: View {
     public var body: some View {
         HStack {
             Shimmer(shape: .circle)
-                .scaledMetricFrame(size: 36, maxSize: 48)
+                .scaledMetricFrame(
+                    size: DesignSystem.ImageSize.smallContactImage,
+                    maxSize: DesignSystem.ImageSize.smallContactImageMaxSize
+                )
 
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 6) {

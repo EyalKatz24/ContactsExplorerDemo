@@ -31,11 +31,17 @@ public struct ContactImage: View {
             switch size {
             case .small:
                 view
-                    .scaledMetricFrame(size: 36, maxSize: 48)
+                    .scaledMetricFrame(
+                        size: DesignSystem.ImageSize.smallContactImage,
+                        maxSize: DesignSystem.ImageSize.smallContactImageMaxSize
+                    )
                 
             case .fixedLarge:
                 view
-                    .frame(width: 140, height: 140)
+                    .frame(
+                        width: DesignSystem.ImageSize.fixedLargeContactImage,
+                        height: DesignSystem.ImageSize.fixedLargeContactImage
+                    )
             }
         }
     }
