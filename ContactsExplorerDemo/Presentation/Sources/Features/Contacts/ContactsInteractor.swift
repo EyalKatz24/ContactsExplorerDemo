@@ -7,9 +7,20 @@
 
 import Foundation
 import Dependencies
+import Domain
+import Models
 
 struct ContactsInteractor {
+    @Dependency(\.contacts.all) private var getAllContacts
+    @Dependency(\.contacts.authorization) private var getContactsAuthorization
     
+    var allContacts: [Contact] {
+        getAllContacts()
+    }
+    
+    var contactsAuthorization: ContactsAuthorization {
+        getContactsAuthorization()
+    }
 }
 
 extension ContactsInteractor: DependencyKey {

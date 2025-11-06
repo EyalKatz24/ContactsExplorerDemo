@@ -8,7 +8,7 @@
 import Foundation
 import Utilities
 
-public struct Contact: Codable, Identifiable {
+public struct Contact: Identifiable, Codable, Hashable, Sendable {
     public let id: String
     public let imageData: Data?
     public let firstName: String

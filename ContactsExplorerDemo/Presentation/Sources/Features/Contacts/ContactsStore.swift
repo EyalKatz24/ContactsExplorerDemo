@@ -7,15 +7,26 @@
 
 import Foundation
 import ComposableArchitecture
+import Models
+import InternalUtilities
 
 @Reducer
 public struct ContactsStore {
     
     @ObservableState
     public struct State: Equatable {
+        var viewState: ViewState
+        var searchText: String = .empty
+        var contacts: [Contact]
         
         public init() {
+            @Dependency(\.interactor) var interactor
+            self.contacts = interactor.allContacts
             
+            self.viewState = switch interactor.contactsAuthorization {
+            case .permitted, .notDetermined: .loading
+            case .notPermitted: .error
+            }
         }
     }
     
@@ -55,6 +66,14 @@ public struct ContactsStore {
         case .onAppear:
             return .none
         }
+    }
+}
+
+extension ContactsStore {
+    enum ViewState: Equatable {
+        case loading
+        case loaded
+        case error
     }
 }
 
