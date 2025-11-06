@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		2E62786C2EBC6A2700E7F67C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62786B2EBC6A2700E7F67C /* ComposableArchitecture */; };
 		2E62786F2EBC6A8500E7F67C /* Localized in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62786E2EBC6A8500E7F67C /* Localized */; };
+		2E62788D2EBC801B00E7F67C /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62788C2EBC801B00E7F67C /* Models */; };
+		2E62788F2EBC801B00E7F67C /* Services in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62788E2EBC801B00E7F67C /* Services */; };
+		2E6278912EBC801B00E7F67C /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278902EBC801B00E7F67C /* Domain */; };
+		2E6278932EBC801B00E7F67C /* Utilities in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278922EBC801B00E7F67C /* Utilities */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E6278912EBC801B00E7F67C /* Domain in Frameworks */,
+				2E6278932EBC801B00E7F67C /* Utilities in Frameworks */,
+				2E62788F2EBC801B00E7F67C /* Services in Frameworks */,
+				2E62788D2EBC801B00E7F67C /* Models in Frameworks */,
 				2E62786F2EBC6A8500E7F67C /* Localized in Frameworks */,
 				2E62786C2EBC6A2700E7F67C /* ComposableArchitecture in Frameworks */,
 			);
@@ -61,6 +69,7 @@
 				2E6278762EBC6C8F00E7F67C /* Domain */,
 				2E6278772EBC6CD100E7F67C /* Presentation */,
 				2E62785C2EBC67AB00E7F67C /* ContactsExplorerDemo */,
+				2E62788B2EBC801B00E7F67C /* Frameworks */,
 				2E62785B2EBC67AB00E7F67C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,6 +80,13 @@
 				2E62785A2EBC67AB00E7F67C /* ContactsExplorerDemo.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2E62788B2EBC801B00E7F67C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,6 +111,10 @@
 			packageProductDependencies = (
 				2E62786B2EBC6A2700E7F67C /* ComposableArchitecture */,
 				2E62786E2EBC6A8500E7F67C /* Localized */,
+				2E62788C2EBC801B00E7F67C /* Models */,
+				2E62788E2EBC801B00E7F67C /* Services */,
+				2E6278902EBC801B00E7F67C /* Domain */,
+				2E6278922EBC801B00E7F67C /* Utilities */,
 			);
 			productName = ContactsExplorerDemo;
 			productReference = 2E62785A2EBC67AB00E7F67C /* ContactsExplorerDemo.app */;
@@ -417,6 +437,22 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E62786D2EBC6A8500E7F67C /* XCRemoteSwiftPackageReference "Localized" */;
 			productName = Localized;
+		};
+		2E62788C2EBC801B00E7F67C /* Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Models;
+		};
+		2E62788E2EBC801B00E7F67C /* Services */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Services;
+		};
+		2E6278902EBC801B00E7F67C /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		2E6278922EBC801B00E7F67C /* Utilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Utilities;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
