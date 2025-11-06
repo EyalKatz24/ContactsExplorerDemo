@@ -22,7 +22,14 @@ public struct ContactsView: View {
         VStack(spacing: 0) {
             Text("Contacts")
         }
-        .font(.largeTitle)
+        .navigationBarTitleDisplayMode(.large)
+        .navigationTitle(.localized(.myContactsTitle))
+        .searchable(
+            text: $store.searchText.sending(\.onSearchTextChange),
+            placement: .navigationBarDrawer(displayMode: .always),
+            prompt: .localized(.searchContactsPrompt)
+        )
+        .autocorrectionDisabled()
         .onFirstAppear {
             send(.onFirstAppear)
         }

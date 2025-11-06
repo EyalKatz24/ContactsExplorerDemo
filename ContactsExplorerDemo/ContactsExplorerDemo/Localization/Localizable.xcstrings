@@ -12,6 +12,17 @@
         }
       }
     },
+    "my_contacts_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Contacts"
+          }
+        }
+      }
+    },
     "NSContactsUsageDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -19,6 +30,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contacts access is required to use that app."
+          }
+        }
+      }
+    },
+    "search_contacts_prompt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search contacts"
           }
         }
       }

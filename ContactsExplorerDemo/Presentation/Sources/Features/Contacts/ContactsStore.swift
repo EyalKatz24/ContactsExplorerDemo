@@ -48,6 +48,8 @@ public struct ContactsStore {
         case onContactsAuthorizationResult(Bool)
         case retrieveContacts
         case onRetrieveContactsResult
+        case onSearchTextChange(String)
+        case setFilteredContacts([Contact])
     }
     
     @Dependency(\.interactor) private var interactor
@@ -101,6 +103,31 @@ public struct ContactsStore {
                 state.viewState = .loaded
                 return .none
                 
+            case let .onSearchTextChange(searchValue):
+                state.searchText = searchValue
+
+                guard searchValue.isNotEmpty else {
+                    state.contacts = interactor.allContacts
+                    return .none
+                }
+        
+                let searchText = state.searchText
+                return .concatenate(
+                    .cancel(id: CancelID.contactsFilter),
+                    .run(priority: .userInitiated) { send in
+                        let filteredContacts = await interactor.filterContacts(using: searchValue)
+
+                        if searchValue == searchText {
+                            await send(.setFilteredContacts(filteredContacts))
+                        }
+                    }
+                    .cancellable(id: CancelID.contactsFilter, cancelInFlight: true)
+                )
+                
+            case let .setFilteredContacts(filteredContacts):
+                state.contacts = filteredContacts
+                return .none
+                
             case .navigation:
                 return .none
             }
@@ -129,6 +156,10 @@ extension ContactsStore {
         case loading
         case loaded
         case error
+    }
+    
+    fileprivate enum CancelID {
+        case contactsFilter
     }
 }
 

@@ -10,5 +10,7 @@ import Localized
 
 @Localized(keyFormat: .lowerSnakeCase)
 public enum Localization: Equatable {
+    case myContactsTitle
+    case searchContactsPrompt
     case email
 }

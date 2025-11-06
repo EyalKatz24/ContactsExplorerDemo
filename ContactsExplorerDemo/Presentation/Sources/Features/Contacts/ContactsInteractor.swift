@@ -13,6 +13,7 @@ import Models
 struct ContactsInteractor {
     @Dependency(\.contacts.all) private var getAllContacts
     @Dependency(\.contacts.authorization) private var getContactsAuthorization
+    @Dependency(\.contacts.filterUsingQuery) private var filterContactsUsingQuery
     @Dependency(\.contacts.didRetrieveContacts) var didRetrieveContacts
     @Dependency(\.contacts.retrieveAll) var retrieveContacts
     @Dependency(\.contacts.requestContactsAuthorization) var requestContactsAuthorization
@@ -23,6 +24,10 @@ struct ContactsInteractor {
     
     var contactsAuthorization: ContactsAuthorization {
         getContactsAuthorization()
+    }
+    
+    func filterContacts(using query: String) async -> [Contact] {
+        await filterContactsUsingQuery(query)
     }
 }
 
