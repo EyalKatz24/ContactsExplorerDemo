@@ -7,8 +7,8 @@
 
 import SwiftUI
 import ComposableArchitecture
-import Contacts
 import DesignSystem
+import ContactsFeature
 
 public extension ContactsNavigator {
     
@@ -27,21 +27,10 @@ public extension ContactsNavigator {
                     ContactsView(store: store.scope(state: \.root, action: \.root))
                 },
                 destination: { store in
-                    WithPerceptionTracking {
-                        switch store.case {
-                            // Remove if you don't have any other module in this navigator
-                        }
-                    }
-                }
-            )
-            .fullScreenCover(
-                item: $store.scope(state: \.destination, action: \.destination),
-                content: { store in
-                    WithPerceptionTracking {
-                        switch store.case {
-                            // Remove if you don't need any presentation
-                        }
-                    }
+                    // Future dev
+//                    switch store.case {
+//
+//                    }
                 }
             )
         }

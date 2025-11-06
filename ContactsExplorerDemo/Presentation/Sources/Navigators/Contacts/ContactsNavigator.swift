@@ -6,7 +6,7 @@
 //
 
 import ComposableArchitecture
-import Contacts
+import ContactsFeature
 
 @Reducer
 public struct ContactsNavigator {
