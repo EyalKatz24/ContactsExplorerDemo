@@ -13,4 +13,12 @@ public enum Localization: Equatable {
     case myContactsTitle
     case searchContactsPrompt
     case email
+    case openSettings
+    case noContactsToDisplay
+    case noContactsToDisplayMessage
+    case noContactSearchResults
+    case noResultsFor(searchText: String)
+    case checkYourSpellingOrTryDifferentKeywords
+    case contactsAccessDenied
+    case enableContactsAccessInSettings
 }
