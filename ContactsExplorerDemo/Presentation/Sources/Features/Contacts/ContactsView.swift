@@ -19,20 +19,75 @@ public struct ContactsView: View {
     }
     
     public var body: some View {
-        VStack(spacing: 0) {
-            Text("Contacts")
+        GeometryReader { geometry in
+            ScrollView(showsIndicators: false) {
+                LazyVStack(spacing: 0) {
+                    switch store.viewState {
+                    case .loading:
+                        loadingView()
+                        
+                    case .loaded:
+                        if store.contacts.isEmpty {
+                            emptyStateView(geometry)
+                        } else {
+                            loadedView()
+                        }
+                        
+                    case .error:
+                        errorView(geometry)
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal)
+            .animation(.smooth, value: store.viewState)
+            .navigationBarTitleDisplayMode(.large)
+            .navigationTitle(.localized(.myContactsTitle))
+            .searchable(
+                text: $store.searchText.sending(\.onSearchTextChange),
+                placement: .navigationBarDrawer(displayMode: .always),
+                prompt: .localized(.searchContactsPrompt)
+            )
+            .autocorrectionDisabled()
+            .onFirstAppear {
+                send(.onFirstAppear)
+            }
         }
-        .navigationBarTitleDisplayMode(.large)
-        .navigationTitle(.localized(.myContactsTitle))
-        .searchable(
-            text: $store.searchText.sending(\.onSearchTextChange),
-            placement: .navigationBarDrawer(displayMode: .always),
-            prompt: .localized(.searchContactsPrompt)
-        )
-        .autocorrectionDisabled()
-        .onFirstAppear {
-            send(.onFirstAppear)
+    }
+    
+    @ViewBuilder
+    private func loadingView() -> some View {
+        EmptyView() // TODO: Shimmering when items are ready
+    }
+    
+    @ViewBuilder
+    private func emptyStateView(_ geometry: GeometryProxy) -> some View {
+        if store.searchText.isEmpty {
+            EmptyStateView(
+                type: .noContactsToDisplay,
+                minHeight: geometry.size.height
+            )
+        } else {
+            EmptyStateView(
+                type: .noContactSearchResults(searchText: store.searchText),
+                minHeight: geometry.size.height
+            )
         }
+    }
+    
+    @ViewBuilder
+    private func errorView(_ geometry: GeometryProxy) -> some View {
+        EmptyStateView(
+            type: .noContactsAuthorization,
+            minHeight: geometry.size.height) {
+                // TODO:
+//                send(.onOpenSettingsTap)
+            }
+    }
+    
+    @ViewBuilder
+    private func loadedView() -> some View {
+        EmptyView()
     }
 }
 
