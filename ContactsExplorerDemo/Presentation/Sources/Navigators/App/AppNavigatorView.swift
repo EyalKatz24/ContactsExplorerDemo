@@ -9,9 +9,12 @@ import SwiftUI
 import ComposableArchitecture
 import Contacts
 import DesignSystem
+import InternalUtilities
+import ContactsNavigator
 
 public extension AppNavigator {
     
+    @ViewAction(for: AppNavigator.self)
     struct ContentView: View {
         
         @Bindable public var store: StoreOf<AppNavigator>
@@ -22,28 +25,11 @@ public extension AppNavigator {
         
         public var body: some View {
             NavigationStack(
-                path: $store.scope(state: \.path, action: \.path),
                 root: {
-                    ContactsView(store: store.scope(state: \.root, action: \.root))
-                },
-                destination: { store in
-                    WithPerceptionTracking {
-                        switch store.case {
-                            // Remove if you don't have any other module in this navigator
-                        }
-                    }
+                    ContactsNavigator.ContentView(store: store.scope(state: \.root, action: \.root))
                 }
             )
-            .fullScreenCover(
-                item: $store.scope(state: \.destination, action: \.destination),
-                content: { store in
-                    WithPerceptionTracking {
-                        switch store.case {
-                            // Remove if you don't need any presentation
-                        }
-                    }
-                }
-            )
+            .onFirstAppear { send(.onFirstAppear) }
         }
     }
 }
