@@ -12,6 +12,7 @@ public struct ContactsUseCases {
     public var all: () -> [Contact]
     public var retrieveAll: () async -> Void
     public var requestContactsAuthorization: () async -> Bool
+    public var didRetrieveContacts: () async -> Bool
     public var authorization: () -> ContactsAuthorization
 }
 
@@ -28,6 +29,10 @@ extension ContactsUseCases: DependencyKey {
         requestContactsAuthorization: {
             @Dependency(\.requestContactsAuthorization) var requestContactsAuthorization
             return await requestContactsAuthorization()
+        },
+        didRetrieveContacts: {
+            @Dependency(\.didRetrieveContacts) var didRetrieveContacts
+            return await didRetrieveContacts()
         },
         authorization: {
             @Dependency(\.getContactsAuthorization) var getContactsAuthorization
