@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E62786C2EBC6A2700E7F67C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62786B2EBC6A2700E7F67C /* ComposableArchitecture */; };
+		2E62786F2EBC6A8500E7F67C /* Localized in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62786E2EBC6A8500E7F67C /* Localized */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E62786F2EBC6A8500E7F67C /* Localized in Frameworks */,
 				2E62786C2EBC6A2700E7F67C /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +86,7 @@
 			name = ContactsExplorerDemo;
 			packageProductDependencies = (
 				2E62786B2EBC6A2700E7F67C /* ComposableArchitecture */,
+				2E62786E2EBC6A8500E7F67C /* Localized */,
 			);
 			productName = ContactsExplorerDemo;
 			productReference = 2E62785A2EBC67AB00E7F67C /* ContactsExplorerDemo.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				2E62786A2EBC6A2700E7F67C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				2E62786D2EBC6A8500E7F67C /* XCRemoteSwiftPackageReference "Localized" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2E62785B2EBC67AB00E7F67C /* Products */;
@@ -385,6 +389,14 @@
 				minimumVersion = 1.23.1;
 			};
 		};
+		2E62786D2EBC6A8500E7F67C /* XCRemoteSwiftPackageReference "Localized" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/EyalKatz24/Localized.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -392,6 +404,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E62786A2EBC6A2700E7F67C /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		2E62786E2EBC6A8500E7F67C /* Localized */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E62786D2EBC6A8500E7F67C /* XCRemoteSwiftPackageReference "Localized" */;
+			productName = Localized;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
