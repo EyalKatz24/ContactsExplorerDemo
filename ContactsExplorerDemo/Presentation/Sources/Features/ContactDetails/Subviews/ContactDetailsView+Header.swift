@@ -13,17 +13,17 @@ extension ContactDetailsView {
     
     @ViewBuilder
     func header() -> some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 0) {
             if let job = store.contact.job {
                 Text(job.title)
-                    .font(.system(size: 24))
+                    .font(.headline)
                     .fontWeight(.medium)
                     .foregroundStyle(.secondary)
             }
             
             if let fullName = store.contact.fullName {
                 Text(fullName)
-                    .font(.system(size: 36))
+                    .font(.largeTitle)
                     .fontWeight(.semibold)
                     .foregroundStyle(.primary)
             }

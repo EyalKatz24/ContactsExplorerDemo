@@ -48,7 +48,7 @@ public struct ContactDetailsView: View {
     private func contactBackgroundGradient() -> some View {
         LinearGradient(
             colors: [
-                .white,
+                .white.opacity(0.8),
                 store.contact.averageColor
             ],
             startPoint: .topLeading,

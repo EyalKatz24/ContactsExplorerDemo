@@ -166,7 +166,7 @@
         }
       }
     },
-    "phoneNumbers" : {
+    "phone_numbers" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
