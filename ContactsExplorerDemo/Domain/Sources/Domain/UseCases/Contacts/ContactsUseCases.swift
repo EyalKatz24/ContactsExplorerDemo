@@ -11,6 +11,7 @@ import Models
 public struct ContactsUseCases {
     public var all: () -> [Contact]
     public var retrieveAll: () async -> Void
+    public var toggleContactFavoriteStatus: (Contact) async -> Void
     public var requestContactsAuthorization: () async -> Bool
     public var didRetrieveContacts: () async -> Bool
     public var filterUsingQuery: (String) async -> [Contact]
@@ -26,6 +27,10 @@ extension ContactsUseCases: DependencyKey {
         retrieveAll: {
             @Dependency(\.retrieveContacts) var retrieveAllContacts
             return await retrieveAllContacts()
+        },
+        toggleContactFavoriteStatus: { contact in
+            @Dependency(\.toggleContactFavoriteStatus) var toggleContactFavoriteStatus
+            return await toggleContactFavoriteStatus(contact)
         },
         requestContactsAuthorization: {
             @Dependency(\.requestContactsAuthorization) var requestContactsAuthorization
