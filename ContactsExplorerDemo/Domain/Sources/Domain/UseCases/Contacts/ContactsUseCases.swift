@@ -13,6 +13,7 @@ public struct ContactsUseCases {
     public var retrieveAll: () async -> Void
     public var requestContactsAuthorization: () async -> Bool
     public var didRetrieveContacts: () async -> Bool
+    public var filterUsingQuery: (String) async -> [Contact]
     public var authorization: () -> ContactsAuthorization
 }
 
@@ -33,6 +34,10 @@ extension ContactsUseCases: DependencyKey {
         didRetrieveContacts: {
             @Dependency(\.didRetrieveContacts) var didRetrieveContacts
             return await didRetrieveContacts()
+        },
+        filterUsingQuery: { query in
+            @Dependency(\.filterContactsUsingQuery) var filterContactsUsingQuery
+            return await filterContactsUsingQuery(query)
         },
         authorization: {
             @Dependency(\.getContactsAuthorization) var getContactsAuthorization
