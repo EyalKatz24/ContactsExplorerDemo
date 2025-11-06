@@ -18,6 +18,7 @@
 		2E6278992EBC85C600E7F67C /* ContactsNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278982EBC85C600E7F67C /* ContactsNavigator */; };
 		2E62789B2EBC85C600E7F67C /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 2E62789A2EBC85C600E7F67C /* DesignSystem */; };
 		2E6278A12EBCA22D00E7F67C /* VeryLazy in Frameworks */ = {isa = PBXBuildFile; productRef = 2E6278A02EBCA22D00E7F67C /* VeryLazy */; };
+		2EA4E22A2EBD10AB00910B60 /* ContactDetailsFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 2EA4E2292EBD10AB00910B60 /* ContactDetailsFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 				2E6278912EBC801B00E7F67C /* Domain in Frameworks */,
 				2E6278A12EBCA22D00E7F67C /* VeryLazy in Frameworks */,
 				2E6278952EBC85C600E7F67C /* AppNavigator in Frameworks */,
+				2EA4E22A2EBD10AB00910B60 /* ContactDetailsFeature in Frameworks */,
 				2E6278972EBC85C600E7F67C /* ContactsFeature in Frameworks */,
 				2E6278992EBC85C600E7F67C /* ContactsNavigator in Frameworks */,
 				2E6278932EBC801B00E7F67C /* Utilities in Frameworks */,
@@ -117,6 +119,7 @@
 				2E6278982EBC85C600E7F67C /* ContactsNavigator */,
 				2E62789A2EBC85C600E7F67C /* DesignSystem */,
 				2E6278A02EBCA22D00E7F67C /* VeryLazy */,
+				2EA4E2292EBD10AB00910B60 /* ContactDetailsFeature */,
 			);
 			productName = ContactsExplorerDemo;
 			productReference = 2E62785A2EBC67AB00E7F67C /* ContactsExplorerDemo.app */;
@@ -487,6 +490,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E62789F2EBCA22D00E7F67C /* XCRemoteSwiftPackageReference "swiftui-very-lazy" */;
 			productName = VeryLazy;
+		};
+		2EA4E2292EBD10AB00910B60 /* ContactDetailsFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ContactDetailsFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
