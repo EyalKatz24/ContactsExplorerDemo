@@ -34,6 +34,7 @@ public struct ContactsStore {
         @CasePathable
         public enum View: Equatable {
             case onFirstAppear
+            case onOpenSettingsTap
         }
         
         @CasePathable
@@ -146,6 +147,11 @@ public struct ContactsStore {
                 
             case .error:
                 return .none
+            }
+            
+        case .onOpenSettingsTap:
+            return .run { _ in
+                await interactor.openAppSettings()
             }
         }
     }

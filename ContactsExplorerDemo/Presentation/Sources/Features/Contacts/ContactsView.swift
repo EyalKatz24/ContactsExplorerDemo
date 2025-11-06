@@ -80,8 +80,7 @@ public struct ContactsView: View {
         EmptyStateView(
             type: .noContactsAuthorization,
             minHeight: geometry.size.height) {
-                // TODO:
-//                send(.onOpenSettingsTap)
+                send(.onOpenSettingsTap)
             }
     }
     

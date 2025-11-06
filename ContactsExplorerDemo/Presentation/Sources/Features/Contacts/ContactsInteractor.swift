@@ -17,6 +17,7 @@ struct ContactsInteractor {
     @Dependency(\.contacts.didRetrieveContacts) var didRetrieveContacts
     @Dependency(\.contacts.retrieveAll) var retrieveContacts
     @Dependency(\.contacts.requestContactsAuthorization) var requestContactsAuthorization
+    @Dependency(\.app.openSettings) var openAppSettings
     
     var allContacts: [Contact] {
         getAllContacts()
