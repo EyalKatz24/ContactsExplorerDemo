@@ -27,4 +27,6 @@ public enum Localization: Equatable {
     case messageDemoAction
     case birthday
     case phoneNumbers
+    case markAsFavorite
+    case markedAsFavorite
 }
