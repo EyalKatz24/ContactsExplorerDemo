@@ -12,6 +12,17 @@
         }
       }
     },
+    "birthday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday"
+          }
+        }
+      }
+    },
     "check_your_spelling_or_try_different_keywords" : {
       "extractionState" : "manual",
       "localizations" : {
