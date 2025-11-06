@@ -30,9 +30,13 @@ public struct ContactDetailsView: View {
                 
                 header()
                     .padding(.top, 16)
+                
+                labelButton()
+                    .animation(.bouncy, value: store.contact.isFavorite)
+                    .padding(.top, 16)
                     
                 detailsView()
-                    .padding(.top, 40)
+                    .padding(.top, 32)
             }
         }
         .featureScreen()

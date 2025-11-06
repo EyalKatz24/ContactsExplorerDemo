@@ -25,6 +25,7 @@ public struct ContactDetailsStore {
         @CasePathable
         public enum View: Equatable {
             case onFirstAppear
+            case onContactFavoriteStatusTap
         }
         
         @CasePathable
@@ -34,6 +35,7 @@ public struct ContactDetailsStore {
         
         case view(View)
         case navigation(Navigation)
+        case toggleContactFavoriteStatus
     }
     
     @Dependency(\.interactor) private var interactor
@@ -46,6 +48,12 @@ public struct ContactDetailsStore {
             case let .view(action):
                 return reduceViewAction(&state, action)
                 
+            case .toggleContactFavoriteStatus:
+                let contact = state.contact
+                return .run { send in
+                    await interactor.toggleContactFavoriteStatus(contact)
+                }
+                
             case .navigation:
                 return .none
             }
@@ -56,6 +64,9 @@ public struct ContactDetailsStore {
         switch action {
         case .onFirstAppear:
             return .none
+            
+        case .onContactFavoriteStatusTap:
+            return .send(.toggleContactFavoriteStatus)
         }
     }
 }

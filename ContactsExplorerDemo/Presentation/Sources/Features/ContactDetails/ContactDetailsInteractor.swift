@@ -7,9 +7,10 @@
 
 import Foundation
 import Dependencies
+import Domain
 
 struct ContactDetailsInteractor {
-    
+    @Dependency(\.contacts.toggleContactFavoriteStatus) var toggleContactFavoriteStatus
 }
 
 extension ContactDetailsInteractor: DependencyKey {
