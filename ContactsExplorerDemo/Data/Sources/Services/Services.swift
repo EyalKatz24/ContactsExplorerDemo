@@ -8,7 +8,7 @@
 import Dependencies
 
 public struct Services {
-    
+    public let contacts = ContactsService()
 }
 
 extension Services: DependencyKey {
