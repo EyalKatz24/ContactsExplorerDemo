@@ -21,4 +21,7 @@ public enum Localization: Equatable {
     case checkYourSpellingOrTryDifferentKeywords
     case contactsAccessDenied
     case enableContactsAccessInSettings
+    case addToFavorites
+    case removeFromFavorites
+    case messageDemoAction
 }
