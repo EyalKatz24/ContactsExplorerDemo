@@ -17,7 +17,7 @@ extension ContactDetailsView {
             send(.onContactFavoriteStatusTap)
         } label: {
             HStack {
-                Text(store.contact.isFavorite ? .markAsFavorite : .markedAsFavorite)
+                Text(store.contact.isFavorite ? .markedAsFavorite : .markAsFavorite)
                     .font(.body)
                     .fontWeight(.heavy)
                     .foregroundStyle(.primary)
