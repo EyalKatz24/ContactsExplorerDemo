@@ -25,6 +25,7 @@ public struct ContactsNavigator {
     public enum Action {
         case root(ContactsStore.Action)
         case path(StackAction<Path.State, Path.Action>)
+        case onContactsChange
     }
     
     public init() { }
@@ -36,6 +37,9 @@ public struct ContactsNavigator {
             switch action {
             case let .root(.navigation(action)):
                 return reduceContactsNavigationAction(&state, action)
+                
+            case .onContactsChange:
+                return reduce(into: &state, action: .root(.onContactsChange))
                 
             case .root, .path:
                 return .none

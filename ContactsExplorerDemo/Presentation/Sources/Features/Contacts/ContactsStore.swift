@@ -47,6 +47,7 @@ public struct ContactsStore {
         
         case view(View)
         case navigation(Navigation)
+        case onContactsChange
         case checkContactsAuthorization
         case requestContactsAuthorization
         case onContactsAuthorizationResult(Bool)
@@ -66,6 +67,11 @@ public struct ContactsStore {
             switch action {
             case let .view(action):
                 return reduceViewAction(&state, action)
+                
+            case .onContactsChange:
+                state.contacts = interactor.allContacts
+                state.searchText = .empty
+                return .none
                 
             case .checkContactsAuthorization:
                 switch interactor.contactsAuthorization {
