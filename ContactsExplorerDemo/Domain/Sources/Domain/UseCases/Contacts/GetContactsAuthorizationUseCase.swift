@@ -23,6 +23,10 @@ extension GetContactsAuthorizationUseCase: DependencyKey {
     static let testValue = GetContactsAuthorizationUseCase(
         getContactsAuthorization: liveValue.getContactsAuthorization
     )
+    
+    static let previewValue = GetContactsAuthorizationUseCase(
+        getContactsAuthorization: { .permitted }
+    )
 }
 
 extension DependencyValues {

@@ -24,6 +24,12 @@ extension RetrieveContactsUseCase: DependencyKey {
     static let testValue = RetrieveContactsUseCase(
         retrieveContacts: liveValue.retrieveContacts
     )
+    
+    static let previewValue = RetrieveContactsUseCase(
+        retrieveContacts: {
+            .success([])
+        }
+    )
 }
 
 extension DependencyValues {
