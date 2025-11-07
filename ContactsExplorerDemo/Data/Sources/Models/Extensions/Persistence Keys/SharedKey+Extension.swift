@@ -21,5 +21,5 @@ public extension SharedKey where Self == InMemoryKey<IdentifiedArrayOf<Contact>>
 
 public extension SharedKey where Self == FileStorageKey<IdentifiedArrayOf<Contact>> {
     
-    static var favoriteContacts: Self { .fileStorage(.applicationDirectory.appending(path: #function).appendingPathExtension("json")) }
+    static var favoriteContacts: Self { .fileStorage(.documentsDirectory.appending(path: #function).appendingPathExtension("json")) }
 }
