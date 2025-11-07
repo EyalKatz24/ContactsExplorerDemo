@@ -5,6 +5,7 @@
 //  Created by Eyal Katz on 06/11/2025.
 //
 
+import Foundation
 import SwiftUI
 import ComposableArchitecture
 import Contacts
@@ -30,6 +31,9 @@ public extension AppNavigator {
                 }
             )
             .onFirstAppear { send(.onFirstAppear) }
+            .onReceive(notification: .CNContactStoreDidChange) { _ in
+                send(.appLifeCycle(.onContactsChange))
+            }
         }
     }
 }

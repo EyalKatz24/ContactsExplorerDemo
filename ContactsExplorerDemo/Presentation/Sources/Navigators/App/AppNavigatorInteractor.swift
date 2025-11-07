@@ -9,7 +9,7 @@ import Dependencies
 import Domain
 
 struct AppNavigatorInteractor {
-
+    @Dependency(\.contacts.retrieveAll) var retrieveAllContacts
 }
 
 extension AppNavigatorInteractor: DependencyKey {
