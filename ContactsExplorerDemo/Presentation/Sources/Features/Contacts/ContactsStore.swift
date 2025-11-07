@@ -28,7 +28,7 @@ public struct ContactsStore {
             
             self.viewState = switch interactor.contactsAuthorization {
             case .permitted, .notDetermined: .loading
-            case .notPermitted: .error
+            case .notPermitted: .error(.contactsAuthorizationDenied)
             }
         }
     }
@@ -38,6 +38,7 @@ public struct ContactsStore {
             case onFirstAppear
             case onContactTap(Contact)
             case onContactActionTap(Contact, ContactAction)
+            case onRetryButtonTap
             case onOpenSettingsTap
         }
         
@@ -52,7 +53,9 @@ public struct ContactsStore {
         case requestContactsAuthorization
         case onContactsAuthorizationResult(Bool)
         case retrieveContacts
-        case onRetrieveContactsResult
+        case onRetrieveContactsResult(Result<[Contact], ContactsError>)
+        case displayAllContacts
+        case onContactsError(ContactsError)
         case onSearchTextChange(String)
         case setFilteredContacts([Contact])
         case toggleContactFavoriteStatus(Contact)
@@ -82,11 +85,11 @@ public struct ContactsStore {
                             return
                         }
                         
-                        await send(.onRetrieveContactsResult)
+                        await send(.displayAllContacts)
                     }
                     
                 case .notPermitted:
-                    state.viewState = .error
+                    state.viewState = .error(.contactsAuthorizationDenied)
                     return .none
                     
                 case .notDetermined:
@@ -100,18 +103,34 @@ public struct ContactsStore {
                 }
                 
             case let .onContactsAuthorizationResult(authorized):
-                state.viewState = authorized ? .loaded : .error
-                return .none
+                guard authorized else {
+                    return .send(.onContactsError(.contactsAuthorizationDenied))
+                }
+                return .send(.retrieveContacts)
                 
             case .retrieveContacts:
                 return .run { send in
-                    await interactor.retrieveContacts()
-                    await send(.onRetrieveContactsResult)
+                    let result = await interactor.retrieveContacts()
+                    await send(.onRetrieveContactsResult(result))
                 }
+                .debounce(for: .shimmer)
 
-            case .onRetrieveContactsResult:
+            case let .onRetrieveContactsResult(result):
+                switch result {
+                case .success:
+                    return .send(.displayAllContacts)
+                    
+                case let .failure(error):
+                    return .send(.onContactsError(error))
+                }
+                
+            case .displayAllContacts:
                 state.contacts = interactor.allContacts
                 state.viewState = .loaded
+                return .none
+                
+            case let .onContactsError(contactsError):
+                state.viewState = .error(contactsError)
                 return .none
                 
             case let .onSearchTextChange(searchValue):
@@ -155,7 +174,7 @@ public struct ContactsStore {
         case .onFirstAppear:
             switch state.viewState {
             case .loading:
-                return .send(.checkContactsAuthorization, after: 0.5)
+                return .send(.checkContactsAuthorization, after: 0.2)
                 
             case .loaded:
                 return .none
@@ -169,6 +188,10 @@ public struct ContactsStore {
             
         case let .onContactActionTap(contact, action):
             return reduceContactActionTap(action, for: contact)
+            
+        case .onRetryButtonTap:
+            state.viewState = .loading
+            return .send(.retrieveContacts)
             
         case .onOpenSettingsTap:
             return .run { _ in
@@ -192,7 +215,7 @@ extension ContactsStore {
     enum ViewState: Equatable {
         case loading
         case loaded
-        case error
+        case error(ContactsError)
     }
     
     fileprivate enum CancelID {

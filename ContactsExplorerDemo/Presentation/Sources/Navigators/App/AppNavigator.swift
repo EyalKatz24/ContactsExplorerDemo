@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import Models
 import ContactsNavigator
 
 @Reducer
@@ -32,6 +33,7 @@ public struct AppNavigator {
         
         case view(View)
         case root(ContactsNavigator.Action)
+        case onRetrieveContactsResult(Result<[Contact], ContactsError>)
         case onUpdatedContactsRetrieval
     }
     
@@ -47,6 +49,15 @@ public struct AppNavigator {
             case let .view(action):
                 return reduceViewAction(&state, action)
                 
+            case let .onRetrieveContactsResult(result):
+                switch result {
+                case .success:
+                    return .send(.onUpdatedContactsRetrieval)
+                    
+                case .failure:
+                    return .none
+                }
+                
             case .onUpdatedContactsRetrieval:
                 return reduce(into: &state, action: .root(.onContactsChange))
                 
@@ -61,7 +72,8 @@ public struct AppNavigator {
     private func reduceViewAction(_ state: inout State, _ action: Action.View) -> Effect<Action> {
         switch action {
         case .onFirstAppear:
-            return .none // TODO: Initiate app
+            // A placeholder action for optional future app initiation actions
+            return .none
             
         case let .appLifeCycle(action):
             return reduceLifeCycleAction(&state, action)
@@ -74,8 +86,8 @@ public struct AppNavigator {
         switch action {
         case .onContactsChange:
             return .run { send in
-                await interactor.retrieveAllContacts()
-                await send(.onUpdatedContactsRetrieval)
+                let result = await interactor.retrieveAllContacts()
+                await send(.onRetrieveContactsResult(result))
             }
         }
     }

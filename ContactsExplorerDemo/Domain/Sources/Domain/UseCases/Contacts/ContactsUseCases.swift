@@ -11,7 +11,7 @@ import Models
 public struct ContactsUseCases {
     public var all: () -> [Contact]
     public var getContactById: (String) -> Contact?
-    public var retrieveAll: () async -> Void
+    public var retrieveAll: () async -> Result<[Contact], ContactsError>
     public var toggleContactFavoriteStatus: (Contact) async -> Void
     public var requestContactsAuthorization: () async -> Bool
     public var didRetrieveContacts: () async -> Bool
