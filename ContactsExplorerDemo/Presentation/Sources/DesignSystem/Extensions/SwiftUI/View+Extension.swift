@@ -21,4 +21,8 @@ public extension View {
     func leadingAligned() -> some View {
         frame(maxWidth: .infinity, alignment: .leading)
     }
+    
+    func onReceive(notification: Notification.Name, perform action: @escaping (NotificationCenter.Publisher.Output) -> Void) -> some View {
+        onReceive(NotificationCenter.default.publisher(for: notification), perform: action)
+    }
 }
