@@ -109,8 +109,8 @@ public actor ContactsService {
     
     // MARK: Public Methods
     
-    nonisolated public func retrieveContacts() async {
-        guard hasUserAuthorization else { return }
+    nonisolated public func retrieveContacts() async -> Result<[Contact], ContactsError> {
+        guard hasUserAuthorization else { return .failure(.contactsAuthorizationDenied) }
         let store = CNContactStore()
         
         let keysToFetch = [
@@ -151,11 +151,24 @@ public actor ContactsService {
             
             await $allContacts.withLock { $0 = IdentifiedArray(uniqueElements: contacts) }
             await setDidRetrieveContacts(with: true)
+            return .success(contacts)
             
+        } catch let error as CNError {
+            switch error.code {
+            case .authorizationDenied:
+                return .failure(.contactsAuthorizationDenied)
+                
+            case .dataAccessError:
+                return .failure(.contactsDataAccessError)
+                
+            default:
+                return .failure(.general)
+            }
         } catch {
             // TODO: Handle error
             await $allContacts.withLock { $0 = [] }
             await setDidRetrieveContacts(with: true)
+            return .failure(.general)
         }
     }
     

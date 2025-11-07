@@ -7,16 +7,17 @@
 
 import Dependencies
 import Services
+import Models
 
 struct RetrieveContactsUseCase {
-    var retrieveContacts: () async -> Void
+    var retrieveContacts: () async -> Result<[Contact], ContactsError>
 }
 
 extension RetrieveContactsUseCase: DependencyKey {
     static let liveValue = RetrieveContactsUseCase(
         retrieveContacts: {
             @Dependency(\.services.contacts) var contactsService
-            await contactsService.retrieveContacts()
+            return await contactsService.retrieveContacts()
         }
     )
     
@@ -26,7 +27,7 @@ extension RetrieveContactsUseCase: DependencyKey {
 }
 
 extension DependencyValues {
-    var retrieveContacts: () async -> Void {
+    var retrieveContacts: () async -> Result<[Contact], ContactsError> {
         get { self[RetrieveContactsUseCase.self].retrieveContacts }
         set { self[RetrieveContactsUseCase.self].retrieveContacts = newValue }
     }
