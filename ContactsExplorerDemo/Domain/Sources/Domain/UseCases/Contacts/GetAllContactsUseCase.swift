@@ -7,6 +7,7 @@
 
 import Sharing
 import Dependencies
+import IdentifiedCollections
 import Models
 
 struct GetAllContactsUseCase {
@@ -16,8 +17,8 @@ struct GetAllContactsUseCase {
 extension GetAllContactsUseCase: DependencyKey {
     static let liveValue = GetAllContactsUseCase(
         getAllContacts: {
-            @Shared(.allContacts) var allContacts: [Contact] = []
-            return allContacts
+            @Shared(.allContacts) var allContacts: IdentifiedArrayOf<Contact> = []
+            return allContacts.elements
         }
     )
     

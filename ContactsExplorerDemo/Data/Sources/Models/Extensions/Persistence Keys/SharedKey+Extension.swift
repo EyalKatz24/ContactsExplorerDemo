@@ -12,7 +12,7 @@ import Utilities
 
 // MARK: - InMemory
 
-public extension SharedKey where Self == InMemoryKey<[Contact]> {
+public extension SharedKey where Self == InMemoryKey<IdentifiedArrayOf<Contact>> {
     
     static var allContacts: Self { .inMemory(#function) }
 }
