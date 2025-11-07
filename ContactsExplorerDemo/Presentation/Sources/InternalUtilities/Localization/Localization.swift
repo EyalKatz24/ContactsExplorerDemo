@@ -13,6 +13,7 @@ public enum Localization: Equatable {
     case myContactsTitle
     case searchContactsPrompt
     case email
+    case emails
     case openSettings
     case noContactsToDisplay
     case noContactsToDisplayMessage
@@ -24,4 +25,8 @@ public enum Localization: Equatable {
     case addToFavorites
     case removeFromFavorites
     case messageDemoAction
+    case birthday
+    case phoneNumbers
+    case markAsFavorite
+    case markedAsFavorite
 }

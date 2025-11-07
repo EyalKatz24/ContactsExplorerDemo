@@ -14,4 +14,11 @@ public enum DesignSystem {
         static let smallContactImageMaxSize: CGFloat = 48
         static let fixedLargeContactImage: CGFloat = 140
     }
+    
+    public enum CornerRadius {
+        static var grouping: CGFloat {
+            guard #available(iOS 26.0, *) else { return 8 }
+            return 16
+        }
+    }
 }

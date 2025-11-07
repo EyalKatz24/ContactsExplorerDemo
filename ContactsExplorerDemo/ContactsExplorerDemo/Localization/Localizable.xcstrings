@@ -12,6 +12,17 @@
         }
       }
     },
+    "birthday" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birthday"
+          }
+        }
+      }
+    },
     "check_your_spelling_or_try_different_keywords" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -45,6 +56,17 @@
         }
       }
     },
+    "emails" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emails"
+          }
+        }
+      }
+    },
     "enable_contacts_access_in_settings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -52,6 +74,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enable Contacts access in Settings to see your contacts"
+          }
+        }
+      }
+    },
+    "mark_as_favorite" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mark as favorite"
+          }
+        }
+      }
+    },
+    "marked_as_favorite" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marked as favorite"
           }
         }
       }
@@ -140,6 +184,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open Settings"
+          }
+        }
+      }
+    },
+    "phone_numbers" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phone Numbers"
           }
         }
       }

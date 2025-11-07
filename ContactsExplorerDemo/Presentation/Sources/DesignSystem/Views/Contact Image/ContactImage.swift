@@ -65,9 +65,10 @@ public struct ContactImage: View {
                 .font(size.initialsFont)
                 .fontWeight(.medium)
                 .tint(.primary)
-                .foregroundStyle(.primary) // TODO: dynamic size limit
+                .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .glassEffect(in: .circle)
+                .dynamicTypeSize(...DynamicTypeSize.xxLarge)
                 
         } else {
             Circle()
@@ -77,7 +78,8 @@ public struct ContactImage: View {
                         .font(size.initialsFont)
                         .fontWeight(.medium)
                         .tint(.primary)
-                        .foregroundStyle(.primary) // TODO: dynamic size limit
+                        .foregroundStyle(.primary)
+                        .dynamicTypeSize(...DynamicTypeSize.xxLarge)
                 }
         }
     }

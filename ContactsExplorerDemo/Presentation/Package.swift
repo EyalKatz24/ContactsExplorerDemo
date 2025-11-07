@@ -13,6 +13,7 @@ let package = Package(
         .navigator(.contacts),
         
         .feature(.contacts),
+        .feature(.contactDetails)
     ],
     dependencies: [
         .package(path: "../Utilities"),
@@ -76,7 +77,8 @@ let navigators: [PackageDescription.Target] = [
     ),
     .navigator(.contacts,
         features: [
-            .contacts
+            .contacts,
+            .contactDetails
         ],
         navigators: []
     ),
@@ -97,6 +99,7 @@ for target in navigators {
 
 enum Feature: String, CaseIterable {
     case contacts = "Contacts"
+    case contactDetails = "ContactDetails"
     
     var name: String { "\(rawValue)Feature" }
     
