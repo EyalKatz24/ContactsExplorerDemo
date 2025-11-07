@@ -31,8 +31,8 @@ The presentation layer implements the **MVI (Model-View-Intent)** pattern using 
 - **Composable Architecture**: State management and unidirectional data flow
 - **Swift Sharing**: Persistent storage for favorite contacts
 - **Identified Collections**: Efficient collection management with stable identifiers
-- **Localized** (custom SPM): Type-safe localization system
-- **VeryLazy** (custom SPM): Optimized lazy loading for SwiftUI views
+- **[Localized](https://github.com/EyalKatz24/Localized)**: Type-safe localization system (personally developed Swift macro for enum-based localization)
+- **[VeryLazy](https://github.com/EyalKatz24/swiftui-very-lazy)**: Optimized lazy loading and shimmer effects for SwiftUI views (personally developed SPM)
 
 ## Features ✨
 
@@ -139,11 +139,13 @@ ContactsExplorerDemo/
 
 The following areas are being actively refined:
 
-1. **Search & Filter Enhancement**: Text highlighting and search matching logic needs improvement to handle additional edge cases and provide more precise results.
+1. **Unit Tests**: The project is currently missing unit tests due to rapid development constraints. Comprehensive test coverage will be added very soon for each layer (Data, Domain, Presentation, and Utilities).
 
-2. **Dynamic Type Support**: Lazy loading layouts for larger dynamic type sizes require pixel-perfect refinement to ensure optimal rendering across all accessibility settings.
+2. **Search & Filter Enhancement**: Text highlighting and search matching logic needs improvement to handle additional edge cases and provide more precise results.
 
-3. **Accessibility Compliance**: The dynamic gradient backgrounds based on contact image average colors may not always meet AAA contrast standards. I'm exploring solutions to ensure consistent accessibility compliance while maintaining the visual design.
+3. **Dynamic Type Support**: Lazy loading layouts for larger dynamic type sizes require pixel-perfect refinement to ensure optimal rendering across all accessibility settings.
+
+4. **Accessibility Compliance**: The dynamic gradient backgrounds based on contact image average colors may not always meet AAA contrast standards. I'm exploring solutions to ensure consistent accessibility compliance while maintaining the visual design.
 
 ## Contributing 💬
 
