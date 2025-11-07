@@ -61,7 +61,8 @@ public struct AppNavigator {
     private func reduceViewAction(_ state: inout State, _ action: Action.View) -> Effect<Action> {
         switch action {
         case .onFirstAppear:
-            return .none // TODO: Initiate app
+            // A placeholder action for optional future app initiation actions
+            return .none
             
         case let .appLifeCycle(action):
             return reduceLifeCycleAction(&state, action)
