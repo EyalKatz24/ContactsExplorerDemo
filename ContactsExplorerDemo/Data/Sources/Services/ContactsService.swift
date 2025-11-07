@@ -165,7 +165,6 @@ public actor ContactsService {
                 return .failure(.general)
             }
         } catch {
-            // TODO: Handle error
             await $allContacts.withLock { $0 = [] }
             await setDidRetrieveContacts(with: true)
             return .failure(.general)
