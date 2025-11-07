@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import Models
 import DesignSystem
 
 @ViewAction(for: ContactsStore.self)
@@ -33,8 +34,8 @@ public struct ContactsView: View {
                             loadedView()
                         }
                         
-                    case .error:
-                        errorView(geometry)
+                    case let .error(contactsError):
+                        errorView(for: contactsError, with: geometry)
                     }
                 }
             }
@@ -82,12 +83,28 @@ public struct ContactsView: View {
     }
     
     @ViewBuilder
-    private func errorView(_ geometry: GeometryProxy) -> some View {
-        EmptyStateView(
-            type: .noContactsAuthorization,
-            minHeight: geometry.size.height) {
-                send(.onOpenSettingsTap)
-            }
+    private func errorView(for error: ContactsError, with geometry: GeometryProxy) -> some View {
+        switch error {
+        case .contactsAuthorizationDenied:
+            EmptyStateView(
+                type: .noContactsAuthorization,
+                minHeight: geometry.size.height) {
+                    send(.onOpenSettingsTap)
+                }
+            
+        case .contactsDataAccessError:
+            EmptyStateView(
+                type: .contactsDataAccessError,
+                minHeight: geometry.size.height
+            )
+            
+        default:
+            EmptyStateView(
+                type: .contactsUnknownError,
+                minHeight: geometry.size.height) {
+                    send(.onRetryButtonTap)
+                }
+        }
     }
     
     @ViewBuilder
