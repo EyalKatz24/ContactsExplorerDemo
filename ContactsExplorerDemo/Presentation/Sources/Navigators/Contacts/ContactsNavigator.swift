@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import InternalUtilities
 import ContactsFeature
 import ContactDetailsFeature
 
@@ -26,6 +27,7 @@ public struct ContactsNavigator {
         case root(ContactsStore.Action)
         case path(StackAction<Path.State, Path.Action>)
         case onContactsChange
+        case notifyPathContactChange
     }
     
     public init() { }
@@ -39,7 +41,15 @@ public struct ContactsNavigator {
                 return reduceContactsNavigationAction(&state, action)
                 
             case .onContactsChange:
-                return reduce(into: &state, action: .root(.onContactsChange))
+                return .merge(
+                    reduce(into: &state, action: .root(.onContactsChange)),
+                    .send(.notifyPathContactChange)
+                )
+                
+            case .notifyPathContactChange:
+                guard let elementId = state.path.elementId(ofCase: \.contactDetails) else { return .none }
+                return state.path[case: \.contactDetails]?.onContactsChange()
+                    .map { Action.path(.element(id: elementId, action: .contactDetails($0))) } ?? .none
                 
             case .root, .path:
                 return .none
@@ -64,3 +74,4 @@ extension ContactsNavigator {
         case contactDetails(ContactDetailsStore)
     }
 }
+
