@@ -40,6 +40,9 @@ public struct ContactsNavigator {
             case let .root(.navigation(action)):
                 return reduceContactsNavigationAction(&state, action)
                 
+            case let .path(.element(_, .contactDetails(.navigation(action)))):
+                return reduceContactDetailsNavigationAction(&state, action)
+                
             case .onContactsChange:
                 return .merge(
                     reduce(into: &state, action: .root(.onContactsChange)),
@@ -62,6 +65,14 @@ public struct ContactsNavigator {
         switch action {
         case let .onContactTap(contact):
             state.path.append(.contactDetails(ContactDetailsStore.State(contact: contact)))
+            return .none
+        }
+    }
+    
+    private func reduceContactDetailsNavigationAction(_ state: inout State, _ action: ContactDetailsStore.Action.Navigation) -> Effect<Action> {
+        switch action {
+        case .onGetUpdatedContactDataFailure:
+            state.path.removeAll()
             return .none
         }
     }

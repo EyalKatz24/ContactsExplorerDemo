@@ -32,7 +32,12 @@ public struct ContactDetailsStore {
             case onContactFavoriteStatusTap
         }
         
+        public enum Navigation: Equatable {
+            case onGetUpdatedContactDataFailure
+        }
+        
         case view(View)
+        case navigation(Navigation)
         case onContactsChange
         case toggleContactFavoriteStatus
     }
@@ -48,9 +53,10 @@ public struct ContactDetailsStore {
                 return reduceViewAction(&state, action)
                 
             case .onContactsChange:
-                if let contact = interactor.getUpdatedData(for: state.contact) {
-                    state.contact = contact
+                guard let contact = interactor.getUpdatedData(for: state.contact) else {
+                    return .send(.navigation(.onGetUpdatedContactDataFailure))
                 }
+                state.contact = contact
                 return .none
                 
             case .toggleContactFavoriteStatus:
@@ -58,6 +64,9 @@ public struct ContactDetailsStore {
                 return .run { send in
                     await interactor.toggleContactFavoriteStatus(contact)
                 }
+                
+            case .navigation:
+                return .none
             }
         }
     }
