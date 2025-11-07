@@ -10,7 +10,9 @@ import InternalUtilities
 public enum EmptyState {
     case noContactSearchResults(searchText: String)
     case noContactsToDisplay
+    case contactsUnknownError
     case noContactsAuthorization
+    case contactsDataAccessError
     
     var imageSystemName: String {
         switch self {
@@ -20,6 +22,8 @@ public enum EmptyState {
             "person.2"
         case .noContactsAuthorization:
             "person.crop.circle.badge.exclamationmark"
+        case .contactsUnknownError, .contactsDataAccessError:
+            "exclamationmark.circle"
         }
     }
 
@@ -29,8 +33,12 @@ public enum EmptyState {
             .noContactSearchResults
         case .noContactsToDisplay:
             .noContactsToDisplay
+        case .contactsUnknownError:
+            .contactsUnknownErrorTitle
         case .noContactsAuthorization:
             .contactsAccessDenied
+        case .contactsDataAccessError:
+            .contactsDataAccessErrorTitle
         }
     }
     
@@ -40,19 +48,23 @@ public enum EmptyState {
             .noResultsFor(searchText: searchText)
         case .noContactsToDisplay:
             .noContactsToDisplayMessage
+        case .contactsUnknownError:
+            .contactsUnknownErrorMessage
         case .noContactsAuthorization:
             .enableContactsAccessInSettings
+        case .contactsDataAccessError:
+            .contactsDataAccessErrorMessage
         }
     }
     
     var buttonTitle: Localization? {
         switch self {
-        case .noContactSearchResults:
-            nil
-        case .noContactsToDisplay:
-            nil
         case .noContactsAuthorization:
             .openSettings
+        case .contactsUnknownError:
+            .retry
+        case .noContactSearchResults, .noContactsToDisplay, .contactsDataAccessError:
+            nil
         }
     }
 }
