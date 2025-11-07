@@ -10,6 +10,7 @@ import Models
 
 public struct ContactsUseCases {
     public var all: () -> [Contact]
+    public var getContactById: (String) -> Contact?
     public var retrieveAll: () async -> Void
     public var toggleContactFavoriteStatus: (Contact) async -> Void
     public var requestContactsAuthorization: () async -> Bool
@@ -23,6 +24,10 @@ extension ContactsUseCases: DependencyKey {
         all: {
             @Dependency(\.getAllContacts) var getAllContacts
             return getAllContacts()
+        },
+        getContactById: { contactId in
+            @Dependency(\.getContactById) var getContactById
+            return getContactById(contactId)
         },
         retrieveAll: {
             @Dependency(\.retrieveContacts) var retrieveAllContacts

@@ -26,12 +26,13 @@ public struct AppNavigator {
             case appLifeCycle(AppLifeCycle)
             
             public enum AppLifeCycle {
-                
+                case onContactsChange
             }
         }
         
         case view(View)
         case root(ContactsNavigator.Action)
+        case onUpdatedContactsRetrieval
     }
     
     @Dependency(\.interactor) private var interactor
@@ -45,6 +46,9 @@ public struct AppNavigator {
             switch action {
             case let .view(action):
                 return reduceViewAction(&state, action)
+                
+            case .onUpdatedContactsRetrieval:
+                return reduce(into: &state, action: .root(.onContactsChange))
                 
             case .root:
                 return .none
@@ -68,7 +72,11 @@ public struct AppNavigator {
     
     private func reduceLifeCycleAction(_ state: inout State, _ action: Action.View.AppLifeCycle) -> Effect<Action> {
         switch action {
-
+        case .onContactsChange:
+            return .run { send in
+                await interactor.retrieveAllContacts()
+                await send(.onUpdatedContactsRetrieval)
+            }
         }
     }
 }

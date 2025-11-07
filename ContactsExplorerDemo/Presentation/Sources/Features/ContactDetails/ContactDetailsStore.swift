@@ -14,10 +14,14 @@ public struct ContactDetailsStore {
     
     @ObservableState
     public struct State: Equatable {
-        public let contact: Contact
+        public var contact: Contact
         
         public init(contact: Contact) {
             self.contact = contact
+        }
+        
+        public func onContactsChange() -> Effect<Action> {
+            .send(.onContactsChange)
         }
     }
     
@@ -28,13 +32,13 @@ public struct ContactDetailsStore {
             case onContactFavoriteStatusTap
         }
         
-        @CasePathable
         public enum Navigation: Equatable {
-            
+            case onGetUpdatedContactDataFailure
         }
         
         case view(View)
         case navigation(Navigation)
+        case onContactsChange
         case toggleContactFavoriteStatus
     }
     
@@ -47,6 +51,13 @@ public struct ContactDetailsStore {
             switch action {
             case let .view(action):
                 return reduceViewAction(&state, action)
+                
+            case .onContactsChange:
+                guard let contact = interactor.getUpdatedData(for: state.contact) else {
+                    return .send(.navigation(.onGetUpdatedContactDataFailure))
+                }
+                state.contact = contact
+                return .none
                 
             case .toggleContactFavoriteStatus:
                 let contact = state.contact

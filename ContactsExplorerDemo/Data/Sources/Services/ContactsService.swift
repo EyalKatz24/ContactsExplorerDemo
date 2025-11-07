@@ -21,7 +21,7 @@ public actor ContactsService {
     private var favoriteContacts: IdentifiedArrayOf<Contact> = []
     
     @Shared(.allContacts)
-    public private(set) var allContacts: [Contact] = []
+    public private(set) var allContacts: IdentifiedArrayOf<Contact> = []
     
     public private(set) var didRetrieveContacts: Bool = false
     
@@ -149,7 +149,7 @@ public actor ContactsService {
                 contacts.append(mappedContact)
             }
             
-            await $allContacts.withLock { $0 = contacts }
+            await $allContacts.withLock { $0 = IdentifiedArray(uniqueElements: contacts) }
             await setDidRetrieveContacts(with: true)
             
         } catch {
