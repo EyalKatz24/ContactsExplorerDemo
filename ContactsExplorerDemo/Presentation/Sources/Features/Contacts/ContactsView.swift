@@ -21,7 +21,7 @@ public struct ContactsView: View {
     
     public var body: some View {
         GeometryReader { geometry in
-            ScrollView(showsIndicators: false) {
+            ScrollView(showsIndicators: store.viewState == .loaded) {
                 LazyVStack(spacing: 0) {
                     switch store.viewState {
                     case .loading:
