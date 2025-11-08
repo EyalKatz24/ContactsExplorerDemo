@@ -118,6 +118,11 @@ public struct ContactsView: View {
             .contextMenu {
                 ForEach(contact.actions, id: \.self) { action in
                     Button {
+                        if action == .favoriteToggle {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                UIImpactFeedbackGenerator(style: .rigid).impactOccurred(intensity: 0.9)
+                            }
+                        }
                         send(.onContactActionTap(contact, action))
                     } label: {
                         Label(
