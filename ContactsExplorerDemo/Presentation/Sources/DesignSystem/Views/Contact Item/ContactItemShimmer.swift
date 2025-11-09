@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VeryLazy
+import Utilities
 
 public struct ContactItemShimmer: View {
 
@@ -19,23 +20,29 @@ public struct ContactItemShimmer: View {
                     size: DesignSystem.ImageSize.smallContactImage,
                     maxSize: DesignSystem.ImageSize.smallContactImageMaxSize
                 )
-
-            GeometryReader { geometry in
-                VStack(alignment: .leading, spacing: 6) {
-                    Shimmer(shape: .rect(cornerRadius: 4))
-                        .scaledMetricHeight(16)
-                        .frame(width: geometry.size.width * CGFloat.random(in: 0.35...0.6))
-                        .padding(.top, 3)
-                    
-                    Shimmer(shape: .rect(cornerRadius: 4))
-                        .scaledMetricHeight(12)
-                        .frame(width: geometry.size.width * CGFloat.random(in: 0.25...0.3))
-                }
+            
+            VStack(alignment: .leading) {
+                Text(String.randomString(in: 10..<30))
+                    .font(.body)
+                    .fontWeight(.medium)
+                    .redacted(reason: .placeholder)
+                    .overlay {
+                        Shimmer(shape: .rect(cornerRadius: 4))
+                    }
+                
+                Text(String.randomString(in: 13..<20))
+                    .font(.caption)
+                    .fontWeight(.regular)
+                    .redacted(reason: .placeholder)
+                    .overlay {
+                        Shimmer(shape: .rect(cornerRadius: 4))
+                    }
             }
             
             Spacer()
         }
-        .fixedSize(horizontal: false, vertical: true)
+        .lineLimit(1)
+        .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .padding(6)
         .contentShape(.rect)
     }

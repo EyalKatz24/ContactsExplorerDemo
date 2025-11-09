@@ -92,6 +92,7 @@ public struct ContactItemView: View {
             
             Spacer()
         }
+        .dynamicTypeSize(...DynamicTypeSize.accessibility3)
         .padding(6)
         .contentShape(.rect)
     }

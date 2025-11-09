@@ -21,4 +21,17 @@ public extension String {
     var trimAlphanumerics: Self {
         trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
     }
+    
+    static func randomString(in range: Range<Int>) -> Self {
+        let base = "abcdefghijklmnopqrstuvwxyz"
+        let randomCount = Int.random(in: range)
+        var randomString: String = ""
+        
+        for _ in 0..<randomCount {
+            let randomCharacter = base.randomElement() ?? "a"
+            randomString.append(randomCharacter)
+        }
+        
+        return randomString
+    }
 }
