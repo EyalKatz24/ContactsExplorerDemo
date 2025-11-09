@@ -27,6 +27,19 @@ public struct ContactImage: View {
                 initialsView()
             }
         }
+        .overlay {
+            if contact.isFavorite {
+                favoriteMark()
+                    .offset(x: 4, y: 2)
+                    .transition(
+                        .asymmetric(
+                            insertion: .scale(scale: 0.5).combined(with: .opacity),
+                            removal: .offset(y: 6).combined(with: .opacity).animation(.smooth(duration: 0.2).delay(0.3))
+                        )
+                    )
+            }
+        }
+        .animation(.bouncy(duration: 0.3, extraBounce: 0.3).delay(0.3), value: contact.isFavorite)
         .modify { view in
             switch size {
             case .small:
@@ -81,6 +94,31 @@ public struct ContactImage: View {
                         .foregroundStyle(.primary)
                         .dynamicTypeSize(...DynamicTypeSize.xxLarge)
                 }
+        }
+    }
+    
+    @ViewBuilder
+    private func favoriteMark() -> some View {
+        switch size {
+        case .small:
+            HStack {
+                Spacer()
+                
+                VStack {
+                    Spacer()
+                    
+                    Image(systemName: "star.fill")
+                        .resizable()
+                        .foregroundStyle(.yellow)
+                        .scaledMetricFrame(
+                            size: DesignSystem.ImageSize.smallContactImage / 2,
+                            maxSize: DesignSystem.ImageSize.smallContactImageMaxSize / 2
+                        )
+                }
+            }
+        
+        case .fixedLarge:
+            EmptyView()
         }
     }
 }
